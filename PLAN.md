@@ -1,4 +1,4 @@
-# План розробки сайту ritual.vn.ua (нова версія)
+# План розробки сайту funeral.vn.ua (нова версія)
 
 **Стек:** Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · MDX · Mobile-first · Vercel · **next-intl**
 **Мови:** українська (основна, без префіксу — `/`) + російська (`/ru/`)
@@ -495,11 +495,11 @@ Helper `components/seo/JsonLd.tsx`:
 ```ts
 return {
   alternates: {
-    canonical: `https://ritual.vn.ua${pathUk}`,
+    canonical: `https://funeral.vn.ua${pathUk}`,
     languages: {
-      'uk-UA': `https://ritual.vn.ua${pathUk}`,
-      'ru-UA': `https://ritual.vn.ua/ru${pathUk}`,
-      'x-default': `https://ritual.vn.ua${pathUk}`,
+      'uk-UA': `https://funeral.vn.ua${pathUk}`,
+      'ru-UA': `https://funeral.vn.ua/ru${pathUk}`,
+      'x-default': `https://funeral.vn.ua${pathUk}`,
     },
   },
 };
@@ -523,7 +523,7 @@ Sitemap дублює це через `<xhtml:link>` для кожного URL.
 ## 8. Структура репозиторію
 
 ```
-ritual.vn.ua/
+funeral.vn.ua/
 ├─ app/
 │  ├─ [locale]/
 │  │  ├─ layout.tsx             # глобальний (header, footer, JSON-LD Organization)
@@ -582,7 +582,7 @@ ritual.vn.ua/
 
 ### Фаза 1 — Ініціалізація (день 1)
 
-1. `pnpm create next-app@latest ritual.vn.ua --typescript --app --tailwind --eslint`
+1. `pnpm create next-app@latest funeral.vn.ua --typescript --app --tailwind --eslint`
 2. Додати залежності з §3.1.
 3. Налаштувати `tsconfig.json` (paths: `@/*`), `next.config.ts` (images domains, headers, MDX).
 4. Підключити шрифти у `app/fonts.ts`.

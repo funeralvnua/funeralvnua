@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ritual.vn.ua';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://funeral.vn.ua';
 
 /**
  * Constants — використовуються у компонентах і JSON-LD.
@@ -47,9 +47,9 @@ export const SITE = {
  * Always returns URL with `/` at the end (matches next.config trailingSlash).
  *
  * @example
- * buildUrl('', 'uk')                  → https://ritual.vn.ua/
- * buildUrl('poslugy/krematsiya', 'uk') → https://ritual.vn.ua/poslugy/krematsiya/
- * buildUrl('tsiny', 'ru')              → https://ritual.vn.ua/ru/tsiny/
+ * buildUrl('', 'uk')                  → https://funeral.vn.ua/
+ * buildUrl('poslugy/krematsiya', 'uk') → https://funeral.vn.ua/poslugy/krematsiya/
+ * buildUrl('tsiny', 'ru')              → https://funeral.vn.ua/ru/tsiny/
  */
 export function buildUrl(path: string, locale: 'uk' | 'ru' = 'uk'): string {
   const clean = path.replace(/^\/+|\/+$/g, ''); // strip leading/trailing slashes

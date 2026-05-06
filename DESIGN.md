@@ -1,4 +1,4 @@
-# Дизайн-система — ritual.vn.ua
+# Дизайн-система — funeral.vn.ua
 
 **Принципи:** стриманість · шанобливість · ясність · доступність (WCAG 2.2 AA)
 **Підхід:** mobile-first · semantic HTML · progressive enhancement

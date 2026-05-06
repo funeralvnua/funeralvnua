@@ -1,4 +1,4 @@
-# ritual.vn.ua
+# funeral.vn.ua
 
 Сайт Вінницької міської ритуальної служби.
 Next.js 15 (App Router) · TypeScript · Tailwind CSS v4 · MDX · next-intl (uk + ru) · Vercel.
