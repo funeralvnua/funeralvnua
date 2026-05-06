@@ -1,7 +1,9 @@
+import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ChevronRight } from 'lucide-react';
 import { jsonLdScript } from '@/lib/schema';
 import { buildUrl } from '@/lib/utils';
+import type { Locale } from '@/i18n/routing';
 
 export interface Crumb {
   label: string;
@@ -10,9 +12,12 @@ export interface Crumb {
 
 interface Props {
   items: Crumb[];
+  locale?: Locale;
 }
 
-export function Breadcrumbs({ items }: Props) {
+export function Breadcrumbs({ items, locale: localeProp }: Props) {
+  const ctxLocale = useLocale() as Locale;
+  const locale = localeProp ?? ctxLocale;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -20,7 +25,7 @@ export function Breadcrumbs({ items }: Props) {
       '@type': 'ListItem',
       position: i + 1,
       name: c.label,
-      item: buildUrl(c.href, 'uk'),
+      item: buildUrl(c.href, locale),
     })),
   };
 

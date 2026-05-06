@@ -27,7 +27,7 @@ export function getLocalBusinessSchema(locale: Locale): WithContext<LocalBusines
     '@type': 'FuneralHome' as 'LocalBusiness',
     name: NAME_BY_LOCALE[locale],
     url: buildUrl('', locale),
-    image: `${SITE.url}/og-default.jpg`,
+    image: `${SITE.url}${locale === 'uk' ? '' : '/ru'}/opengraph-image`,
     telephone: SITE.phone,
     priceRange: '₴₴-₴₴₴',
     address: SITE.addresses.map((a) => ({

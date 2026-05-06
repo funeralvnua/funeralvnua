@@ -13,7 +13,7 @@ import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedServices } from '@/components/sections/RelatedServices';
 import { CallbackForm } from '@/components/sections/CallbackForm';
-import { jsonLdScript } from '@/lib/schema';
+import { jsonLdScript, getLocalBusinessSchema } from '@/lib/schema';
 import { SITE, buildUrl } from '@/lib/utils';
 
 type RouteParams = { locale: string; slug: string };
@@ -81,18 +81,18 @@ export default async function ServicePage({
   const path = `/${subPath}/`;
   const url = buildUrl(subPath, locale as Locale);
 
+  // Reuse full LocalBusiness/FuneralHome schema (з address, geo, opening hours, areaServed)
+  const businessSchema = getLocalBusinessSchema(locale as Locale) as unknown as Record<string, unknown>;
+  const { '@context': _ctx, ...providerBusiness } = businessSchema;
+  void _ctx;
+
   const serviceSchema = {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: post.frontmatter.title,
     description: post.frontmatter.description,
     url,
-    provider: {
-      '@type': 'FuneralHome',
-      name: locale === 'uk' ? 'Вінницька міська ритуальна служба' : 'Винницкая городская ритуальная служба',
-      url: SITE.url,
-      telephone: SITE.phone,
-    },
+    provider: providerBusiness,
     areaServed: {
       '@type': 'City',
       name: locale === 'uk' ? 'Вінниця' : 'Винница',

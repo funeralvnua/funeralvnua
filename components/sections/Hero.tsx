@@ -37,7 +37,7 @@ export function Hero() {
             <a
               href={`tel:${SITE.phone}`}
               className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-7 py-4 text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
-              aria-label={`Зателефонувати ${SITE.phoneDisplay}`}
+              aria-label={`${tCta('callNow')} — ${SITE.phoneDisplay}`}
             >
               <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
               <span>{tCta('callNow')}</span>

@@ -75,7 +75,10 @@ export function ServiceArea() {
               key={g.key}
               type="button"
               role="tab"
+              id={`tab-${g.key}`}
               aria-selected={activeGroup === g.key}
+              aria-controls={`panel-${g.key}`}
+              tabIndex={activeGroup === g.key ? 0 : -1}
               onClick={() => setActiveGroup(g.key)}
               className={cn(
                 'rounded-md px-4 py-2 text-sm font-medium transition-colors',
@@ -90,23 +93,29 @@ export function ServiceArea() {
         </div>
       </div>
 
-      {filtered.length > 0 ? (
-        <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filtered.map((l) => (
-            <li
-              key={l.slug}
-              className="flex items-baseline justify-between gap-3 border-b border-[--color-border-soft] py-3 transition-colors hover:border-[--color-accent]"
-            >
-              <span className="text-base text-[--color-ink]">{l.name[locale]}</span>
-              <small className="shrink-0 font-mono text-xs text-[--color-ink-muted]">
-                ~{l.distanceKm} {t('kmShort')}
-              </small>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-10 text-[--color-ink-soft]">{t('noResults')}</p>
-      )}
+      <div
+        role="tabpanel"
+        id={`panel-${activeGroup}`}
+        aria-labelledby={`tab-${activeGroup}`}
+      >
+        {filtered.length > 0 ? (
+          <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {filtered.map((l) => (
+              <li
+                key={l.slug}
+                className="flex items-baseline justify-between gap-3 border-b border-[--color-border-soft] py-3 transition-colors hover:border-[--color-accent]"
+              >
+                <span className="text-base text-[--color-ink]">{l.name[locale]}</span>
+                <small className="shrink-0 font-mono text-xs text-[--color-ink-muted]">
+                  ~{l.distanceKm} {t('kmShort')}
+                </small>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-10 text-[--color-ink-soft]">{t('noResults')}</p>
+        )}
+      </div>
 
       <div className="mt-12 flex flex-col items-start gap-4 rounded-2xl border border-[--color-accent]/30 bg-[--color-accent-100] p-6 md:flex-row md:items-center md:justify-between md:p-8">
         <p className="text-base text-[--color-ink]">

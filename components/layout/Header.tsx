@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Phone as PhoneIcon } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import { SITE } from '@/lib/utils';
 import { PhoneLink } from './PhoneLink';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { MobileMenu } from './MobileMenu';
@@ -52,6 +54,14 @@ export function Header() {
 
         <div className="flex items-center gap-3 lg:gap-5">
           <PhoneLink source="header" variant="compact" className="hidden sm:inline-flex" />
+          {/* Mobile-only phone icon */}
+          <a
+            href={`tel:${SITE.phone}`}
+            aria-label={`${tSite('name')} — ${SITE.phoneDisplay}`}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-md text-[--color-accent] hover:bg-[--color-surface] sm:hidden"
+          >
+            <PhoneIcon className="h-5 w-5" aria-hidden />
+          </a>
           <span className="hidden lg:inline-flex">
             <LanguageSwitcher />
           </span>

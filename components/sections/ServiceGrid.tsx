@@ -1,8 +1,55 @@
 import { useTranslations, useLocale } from 'next-intl';
-import * as Icons from 'lucide-react';
+import {
+  ArrowRight,
+  Headset,
+  Truck,
+  Snowflake,
+  FileText,
+  Users,
+  ClipboardList,
+  Car,
+  Building2,
+  Tent,
+  MapPin,
+  Shield,
+  Flame,
+  Globe,
+  Archive,
+  Diamond,
+  Sparkles,
+  BookOpen,
+  Music,
+  Music2,
+  UtensilsCrossed,
+  Circle,
+  type LucideIcon,
+} from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import services from '@/data/services.json';
 import type { Locale } from '@/i18n/routing';
+
+const ICON_MAP: Record<string, LucideIcon> = {
+  Headset,
+  Truck,
+  Snowflake,
+  FileText,
+  Users,
+  ClipboardList,
+  Car,
+  Building2,
+  Tent,
+  MapPin,
+  Shield,
+  Flame,
+  Globe,
+  Archive,
+  Diamond,
+  Sparkles,
+  BookOpen,
+  Music,
+  Music2,
+  UtensilsCrossed,
+};
 
 type ServiceGroup = 'urgent' | 'transport' | 'special' | 'ceremonial';
 
@@ -45,7 +92,7 @@ export function ServiceGrid() {
 
               <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((s) => {
-                  const IconComponent = (Icons as unknown as Record<string, React.FC<{ className?: string; 'aria-hidden'?: boolean }>>)[s.icon] ?? Icons.Circle;
+                  const IconComponent = ICON_MAP[s.icon] ?? Circle;
                   return (
                     <li key={s.slug}>
                       <Link
@@ -66,7 +113,7 @@ export function ServiceGrid() {
                         </p>
                         <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[--color-accent]">
                           {tCta('learnMore')}
-                          <Icons.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
                         </span>
                       </Link>
                     </li>

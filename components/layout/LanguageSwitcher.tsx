@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { routing } from '@/i18n/routing';
@@ -11,6 +11,7 @@ export function LanguageSwitcher() {
   const pathname = usePathname();
   const params = useParams();
   const currentLocale = useLocale();
+  const tA11y = useTranslations('a11y');
 
   const handleSwitch = (nextLocale: 'uk' | 'ru') => {
     if (nextLocale === currentLocale) return;
@@ -21,7 +22,7 @@ export function LanguageSwitcher() {
   return (
     <div
       role="group"
-      aria-label="Перемикач мови"
+      aria-label={tA11y('languageSwitch')}
       className="inline-flex items-center gap-1 text-sm font-medium"
     >
       {routing.locales.map((loc, i) => (

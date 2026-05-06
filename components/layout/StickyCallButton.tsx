@@ -6,6 +6,7 @@ import { SITE } from '@/lib/utils';
 
 export function StickyCallButton() {
   const t = useTranslations('cta');
+  const tA11y = useTranslations('a11y');
 
   const handleTelClick = () => {
     if (typeof window !== 'undefined' && 'gtag' in window) {
@@ -21,7 +22,7 @@ export function StickyCallButton() {
   return (
     <aside
       role="region"
-      aria-label="Швидкий зв'язок"
+      aria-label={tA11y('quickContact')}
       className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-2 border-t border-[--color-border] shadow-lg md:hidden"
     >
       <a

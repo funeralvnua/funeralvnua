@@ -11,7 +11,7 @@
   /* ─── Ink — теплий off-white ──────────────────────── */
   --color-ink: #f3eee5;           /* основний текст */
   --color-ink-soft: #b8b1a3;      /* secondary, opisи */
-  --color-ink-muted: #807868;     /* плейсхолдери, метадані */
+  --color-ink-muted: #968d7b;     /* плейсхолдери, метадані — WCAG AA на --color-bg */
 
   /* ─── Brand — приглушений sage + тепле золото ────── */
   --color-primary: #7aab95;       /* світліший sage для темного */

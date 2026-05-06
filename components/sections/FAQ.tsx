@@ -42,7 +42,7 @@ export function FAQ() {
               key={i}
               className="group border-b border-[--color-border] py-5 [&_summary::-webkit-details-marker]:hidden"
             >
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-focus] focus-visible:ring-offset-2 focus-visible:ring-offset-[--color-surface-alt]">
                 <span className="text-lg font-semibold text-[--color-ink] transition-colors group-hover:text-[--color-accent]">
                   {item.q[locale]}
                 </span>
