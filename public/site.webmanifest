@@ -1,0 +1,24 @@
+{
+  "name": "Вінницька міська ритуальна служба",
+  "short_name": "ВМРС",
+  "description": "Ритуальні послуги у Вінниці та області — цілодобово",
+  "lang": "uk",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1714",
+  "theme_color": "#1a1714",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,317 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ─── Surface — теплі темні фони ─────────────────── */
+  --color-bg: #1a1714;            /* deep warm charcoal — основний фон */
+  --color-surface: #221e1a;       /* картки, контейнери */
+  --color-surface-alt: #2a2520;   /* секунд. секції (Trust, ServiceArea) */
+  --color-surface-elev: #322c26;  /* highlighted cards, modals */
+  --color-overlay: rgba(0, 0, 0, 0.65);
+
+  /* ─── Ink — теплий off-white ──────────────────────── */
+  --color-ink: #f3eee5;           /* основний текст */
+  --color-ink-soft: #b8b1a3;      /* secondary, opisи */
+  --color-ink-muted: #807868;     /* плейсхолдери, метадані */
+
+  /* ─── Brand — приглушений sage + тепле золото ────── */
+  --color-primary: #7aab95;       /* світліший sage для темного */
+  --color-primary-700: #5d8b78;
+  --color-primary-100: rgba(122, 171, 149, 0.14);   /* tint */
+  --color-accent: #c9a560;        /* тепле золото — пам'ять, шана */
+  --color-accent-700: #a88340;
+  --color-accent-100: rgba(201, 165, 96, 0.14);
+
+  /* ─── Semantic ─────────────────────────────────────── */
+  --color-emergency: #c1554c;     /* теплий cinnamon — не агресивний */
+  --color-success: #6a9d7d;
+  --color-warning: #d4a44a;
+  --color-danger: #c1554c;
+
+  /* ─── Lines ────────────────────────────────────────── */
+  --color-border: #3a342b;
+  --color-border-soft: #2c2620;
+  --color-focus: #c9a560;         /* золотий focus-ring */
+
+  /* ─── Fonts ────────────────────────────────────────── */
+  --font-heading: var(--font-cormorant), 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: var(--font-manrope), 'Manrope', 'Inter', system-ui, sans-serif;
+
+  /* ─── Radii ────────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* ─── Shadows — на темному ледь помітні + warm glow ─ */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 32px rgba(201, 165, 96, 0.12);  /* gold glow */
+
+  /* ─── Container ────────────────────────────────────── */
+  --container-content: 1200px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    background: var(--color-bg);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-heading);
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--color-ink);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw + 1rem, 3.75rem);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 1.5vw + 1rem, 1.75rem);
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  a:hover {
+    color: var(--color-accent-700);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+
+  /* Scrollbar — теплий темний */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border);
+    opacity: 0.8;
+  }
+}
+
+@layer components {
+  .container-content {
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-content {
+      padding-inline: 2rem;
+    }
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    padding: 0.75rem 1rem;
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 600;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 0;
+  }
+
+  /* Декоративний роздільник — золота волосяна лінія */
+  .divider-gold {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-accent) 50%,
+      transparent 100%
+    );
+    opacity: 0.4;
+  }
+
+  /* Hero ambient gradient — теплий warmth знизу */
+  .hero-gradient {
+    background:
+      radial-gradient(
+        circle at 20% 0%,
+        rgba(122, 171, 149, 0.08),
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 100%,
+        rgba(201, 165, 96, 0.06),
+        transparent 60%
+      );
+  }
+
+  /* Card hover — тонка золота окантовка */
+  .card-hover {
+    transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
+  }
+  .card-hover:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* ─── Prose-MDX — типографіка статей і послуг ──────── */
+
+  /* Blockquote — декоративна золота лапка + вертикальне центрування */
+  .prose-mdx blockquote {
+    position: relative;
+    margin: 2.5rem 0;
+    padding: 2rem 2rem 2rem 4.5rem;
+    background: var(--color-surface-alt);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    min-height: 6rem;
+  }
+  .prose-mdx blockquote::before {
+    content: "«";
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-55%);
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .prose-mdx blockquote p {
+    margin: 0;
+  }
+  .prose-mdx blockquote p + p {
+    margin-top: 0.5rem;
+  }
+  @media (min-width: 768px) {
+    .prose-mdx blockquote {
+      font-size: 1.375rem;
+      padding: 2.25rem 3rem 2.25rem 5rem;
+    }
+    .prose-mdx blockquote::before {
+      font-size: 5rem;
+    }
+  }
+
+  /* Table — zebra striping + золотий header + hover */
+  .prose-mdx table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.95rem;
+  }
+  .prose-mdx thead {
+    background: var(--color-surface-elev);
+    border-bottom: 2px solid var(--color-accent);
+  }
+  .prose-mdx thead th {
+    padding: 0.875rem 1.125rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+  }
+  .prose-mdx tbody tr {
+    transition: background 200ms ease;
+  }
+  .prose-mdx tbody tr:nth-child(odd) {
+    background: var(--color-surface);
+  }
+  .prose-mdx tbody tr:nth-child(even) {
+    background: var(--color-surface-alt);
+  }
+  .prose-mdx tbody tr:hover {
+    background: var(--color-accent-100);
+  }
+  .prose-mdx tbody td {
+    padding: 0.875rem 1.125rem;
+    color: var(--color-ink);
+    border-top: 1px solid var(--color-border-soft);
+    vertical-align: top;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
