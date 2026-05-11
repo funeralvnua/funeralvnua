@@ -4,9 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing, type Locale } from '@/i18n/routing';
-// Analytics (опційно) — підключити після `pnpm add @next/third-parties @vercel/analytics`
-// import { GoogleAnalytics } from '@next/third-parties/google';
-// import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 function isValidLocale(value: string): value is Locale {
   return (routing.locales as readonly string[]).includes(value);
@@ -107,12 +105,9 @@ export default async function LocaleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={jsonLdScript(businessSchema)}
         />
-        {/* Analytics (опційно) — після `pnpm add @next/third-parties @vercel/analytics`
-        <VercelAnalytics />
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
-        */}
       </body>
     </html>
   );
