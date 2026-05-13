@@ -7,6 +7,7 @@ import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { jsonLdScript } from '@/lib/schema';
+import { ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl, cn } from '@/lib/utils';
 import packages from '@/data/packages.json';
 
@@ -28,6 +29,8 @@ export async function generateMetadata({
     ? 'Прозорі ціни на ритуальні послуги у Вінниці. Пакети Економ (12 000 ₴), Стандарт (20 000 ₴), Еліт (від 45 000 ₴). Без прихованих платежів.'
     : 'Прозрачные цены на ритуальные услуги в Виннице. Пакеты Эконом (12 000 ₴), Стандарт (20 000 ₴), Элит (от 45 000 ₴). Без скрытых платежей.';
 
+  const og = ogImageFor('tsiny.premium', SITE.url);
+
   return {
     title,
     description,
@@ -45,7 +48,11 @@ export async function generateMetadata({
       description,
       url: buildUrl('tsiny', locale as Locale),
       locale: isUk ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
     },
+    ...(og && {
+      twitter: { card: 'summary_large_image' as const, title, description, images: [og.url] },
+    }),
   };
 }
 

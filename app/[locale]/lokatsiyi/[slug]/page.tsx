@@ -6,7 +6,8 @@ import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { jsonLdScript } from '@/lib/schema';
-import { buildUrl } from '@/lib/utils';
+import { ogImageFor } from '@/lib/photos';
+import { SITE, buildUrl } from '@/lib/utils';
 import offices from '@/data/offices.json';
 
 type RouteParams = { locale: string; slug: string };
@@ -33,6 +34,8 @@ export async function generateMetadata({
     ? `${office.title.uk} — ритуальна служба Вінниця`
     : `${office.title.ru} — ритуальная служба Винница`;
 
+  const og = ogImageFor(`office.${slug}`, SITE.url);
+
   return {
     title,
     description: office.description[loc],
@@ -44,6 +47,22 @@ export async function generateMetadata({
         'x-default': buildUrl(subPath, 'uk'),
       },
     },
+    openGraph: {
+      type: 'website',
+      title,
+      description: office.description[loc],
+      url: buildUrl(subPath, loc),
+      locale: isUk ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
+    },
+    ...(og && {
+      twitter: {
+        card: 'summary_large_image' as const,
+        title,
+        description: office.description[loc],
+        images: [og.url],
+      },
+    }),
   };
 }
 

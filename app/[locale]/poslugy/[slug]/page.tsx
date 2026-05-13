@@ -14,7 +14,7 @@ import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedServices } from '@/components/sections/RelatedServices';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { RitualImage } from '@/components/ui/RitualImage';
-import { getPhoto } from '@/lib/photos';
+import { getPhoto, ogImageFor } from '@/lib/photos';
 import { jsonLdScript, getLocalBusinessSchema } from '@/lib/schema';
 import { SITE, buildUrl } from '@/lib/utils';
 
@@ -39,6 +39,7 @@ export async function generateMetadata({
   const subPath = `poslugy/${slug}`;
   const ukUrl = buildUrl(subPath, 'uk');
   const ruUrl = buildUrl(subPath, 'ru');
+  const og = ogImageFor(`poslugy.${slug}`, SITE.url);
 
   return {
     title: post.frontmatter.title,
@@ -57,7 +58,16 @@ export async function generateMetadata({
       description: post.frontmatter.description,
       url: locale === 'uk' ? ukUrl : ruUrl,
       locale: locale === 'uk' ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
     },
+    ...(og && {
+      twitter: {
+        card: 'summary_large_image',
+        title: post.frontmatter.title,
+        description: post.frontmatter.description,
+        images: [og.url],
+      },
+    }),
     robots: {
       index: !post.frontmatter.noindex && !post.fallback,
       follow: true,

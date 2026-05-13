@@ -13,6 +13,7 @@ import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedArticles } from '@/components/sections/RelatedArticles';
 import { jsonLdScript } from '@/lib/schema';
+import { ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl } from '@/lib/utils';
 
 type RouteParams = { locale: string; slug: string };
@@ -36,6 +37,7 @@ export async function generateMetadata({
   const subPath = `poradnyk/${slug}`;
   const ukUrl = buildUrl(subPath, 'uk');
   const ruUrl = buildUrl(subPath, 'ru');
+  const og = ogImageFor(`poradnyk.${slug}`, SITE.url) ?? ogImageFor('poradnyk.hero', SITE.url);
 
   return {
     title: post.frontmatter.title,
@@ -56,7 +58,16 @@ export async function generateMetadata({
       locale: locale === 'uk' ? 'uk_UA' : 'ru_UA',
       ...(post.frontmatter.publishedAt && { publishedTime: post.frontmatter.publishedAt }),
       ...(post.frontmatter.updatedAt && { modifiedTime: post.frontmatter.updatedAt }),
+      ...(og && { images: [og] }),
     },
+    ...(og && {
+      twitter: {
+        card: 'summary_large_image' as const,
+        title: post.frontmatter.title,
+        description: post.frontmatter.description,
+        images: [og.url],
+      },
+    }),
     robots: {
       index: !post.frontmatter.noindex && !post.fallback,
       follow: true,

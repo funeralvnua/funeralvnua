@@ -5,6 +5,7 @@ import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { PhoneLink } from '@/components/layout/PhoneLink';
+import { ogImageFor } from '@/lib/photos';
 import { buildUrl, SITE } from '@/lib/utils';
 
 export function generateStaticParams() {
@@ -25,6 +26,8 @@ export async function generateMetadata({
     ? 'Адреси відділень: Коновальця 83, Підлісна 2. Зали прощання — Арабея 1. Цілодобовий телефон, форма зворотного зв\'язку.'
     : 'Адреса отделений: Коновальца 83, Подлесная 2. Залы прощания — Арабея 1. Круглосуточный телефон, форма обратной связи.';
 
+  const og = ogImageFor('kontakty.main', SITE.url);
+
   return {
     title,
     description,
@@ -36,6 +39,17 @@ export async function generateMetadata({
         'x-default': buildUrl('kontakty', 'uk'),
       },
     },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: buildUrl('kontakty', locale as Locale),
+      locale: isUk ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
+    },
+    ...(og && {
+      twitter: { card: 'summary_large_image' as const, title, description, images: [og.url] },
+    }),
   };
 }
 

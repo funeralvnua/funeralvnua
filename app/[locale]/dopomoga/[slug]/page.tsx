@@ -12,6 +12,7 @@ import { getAllSlugs, getPostBySlug } from '@/lib/content';
 import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { jsonLdScript } from '@/lib/schema';
+import { ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl } from '@/lib/utils';
 
 type RouteParams = { locale: string; slug: string };
@@ -35,6 +36,7 @@ export async function generateMetadata({
   const subPath = `dopomoga/${slug}`;
   const ukUrl = buildUrl(subPath, 'uk');
   const ruUrl = buildUrl(subPath, 'ru');
+  const og = ogImageFor(`dopomoga.${slug}`, SITE.url) ?? ogImageFor('dopomoga.hero', SITE.url);
 
   return {
     title: post.frontmatter.title,
@@ -53,7 +55,16 @@ export async function generateMetadata({
       description: post.frontmatter.description,
       url: locale === 'uk' ? ukUrl : ruUrl,
       locale: locale === 'uk' ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
     },
+    ...(og && {
+      twitter: {
+        card: 'summary_large_image' as const,
+        title: post.frontmatter.title,
+        description: post.frontmatter.description,
+        images: [og.url],
+      },
+    }),
     robots: {
       index: !post.frontmatter.noindex && !post.fallback,
       follow: true,

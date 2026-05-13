@@ -59,3 +59,22 @@ export function srcSetFor(
   }
   return photoUrl(src, variant, format);
 }
+
+/**
+ * Open Graph image URL для метаданих сторінки.
+ * Повертає абсолютний URL (1200×630 JPG) для openGraph.images у Next metadata,
+ * або null, якщо фото не задано — тоді спрацює дефолтний opengraph-image.tsx.
+ */
+export function ogImageFor(
+  photoKey: string,
+  siteUrl: string,
+): { url: string; alt: string; width: number; height: number } | null {
+  const entry = getPhoto(photoKey);
+  if (!entry || !entry.src) return null;
+  return {
+    url: `${siteUrl}${photoUrl(entry.src, 'og', 'jpg')}`,
+    alt: entry.alt.uk,
+    width: 1200,
+    height: 630,
+  };
+}

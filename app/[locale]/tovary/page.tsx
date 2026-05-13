@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
+import { ogImageFor } from '@/lib/photos';
 import { buildUrl, SITE } from '@/lib/utils';
 
 export function generateStaticParams() {
@@ -25,6 +26,8 @@ export async function generateMetadata({
     ? 'Каталог ритуальних товарів у Вінниці: труни, вінки на похорон, хрести, ритуальний одяг. Доставка, гарантія якості.'
     : 'Каталог ритуальных товаров в Виннице: гробы, венки на похороны, кресты, ритуальная одежда. Доставка, гарантия качества.';
 
+  const og = ogImageFor('tovary.vinky', SITE.url);
+
   return {
     title,
     description,
@@ -36,6 +39,17 @@ export async function generateMetadata({
         'x-default': buildUrl('tovary', 'uk'),
       },
     },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: buildUrl('tovary', locale as Locale),
+      locale: isUk ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
+    },
+    ...(og && {
+      twitter: { card: 'summary_large_image' as const, title, description, images: [og.url] },
+    }),
   };
 }
 

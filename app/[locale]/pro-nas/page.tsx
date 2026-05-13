@@ -5,6 +5,7 @@ import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { RitualImage } from '@/components/ui/RitualImage';
+import { ogImageFor } from '@/lib/photos';
 import { buildUrl, SITE } from '@/lib/utils';
 
 export function generateStaticParams() {
@@ -25,6 +26,8 @@ export async function generateMetadata({
     ? 'Понад 25 років допомагаємо родинам Вінниці у скорботні дні. Ліцензії, досвід, повний цикл послуг — від агента до пам\'ятника.'
     : 'Более 25 лет помогаем семьям Винницы в дни скорби. Лицензии, опыт, полный цикл услуг — от агента до памятника.';
 
+  const og = ogImageFor('pronas.hero', SITE.url);
+
   return {
     title,
     description,
@@ -36,6 +39,17 @@ export async function generateMetadata({
         'x-default': buildUrl('pro-nas', 'uk'),
       },
     },
+    openGraph: {
+      type: 'website',
+      title,
+      description,
+      url: buildUrl('pro-nas', locale as Locale),
+      locale: locale === 'uk' ? 'uk_UA' : 'ru_UA',
+      ...(og && { images: [og] }),
+    },
+    ...(og && {
+      twitter: { card: 'summary_large_image', title, description, images: [og.url] },
+    }),
   };
 }
 
