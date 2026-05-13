@@ -143,6 +143,61 @@
     "objectPosition": "center 40%",
     "cropNote": "Унікальна арочна архітектура передає модерновий мортуарій. Бажано доповнити фото урни"
   },
+  "poslugy.psaltyr-synhumator": {
+    "src": "stock-open-book-candle",
+    "alt": {
+      "uk": "Відкритий молитовник при свічці — читання Псалтиря",
+      "ru": "Открытый молитвенник при свече — чтение Псалтыря"
+    },
+    "objectPosition": "center 60%",
+    "stock": {
+      "source": "Unsplash",
+      "author": "Sixteen Miles Out",
+      "page": "https://unsplash.com/photos/1N8e3hMTAb8",
+      "license": "Unsplash License"
+    }
+  },
+  "poslugy.orkestr": {
+    "src": "stock-trumpet-bw",
+    "alt": {
+      "uk": "Похоронний оркестр — гра на трубі",
+      "ru": "Похоронный оркестр — игра на трубе"
+    },
+    "objectPosition": "center",
+    "stock": {
+      "source": "Unsplash",
+      "author": "Gilles Gravier",
+      "page": "https://unsplash.com/photos/hLwh2H6RXsU",
+      "license": "Unsplash License"
+    }
+  },
+  "poslugy.orkestr.alt": {
+    "src": "stock-brass-band",
+    "alt": {
+      "uk": "Духовий оркестр у строю",
+      "ru": "Духовой оркестр в строю"
+    },
+    "stock": {
+      "source": "Pexels",
+      "author": "Kari Alfonso",
+      "page": "https://www.pexels.com/photo/33968490/",
+      "license": "Pexels License"
+    }
+  },
+  "poslugy.pomynalnyi-obid": {
+    "src": "stock-memorial-table",
+    "alt": {
+      "uk": "Поминальний стіл — світла пам'ять зі свічками",
+      "ru": "Поминальный стол — светлая память со свечами"
+    },
+    "objectPosition": "center 40%",
+    "stock": {
+      "source": "Pexels",
+      "author": "Kampus Production",
+      "page": "https://www.pexels.com/photo/8871516/",
+      "license": "Pexels License"
+    }
+  },
   "poslugy.repatriatsiya": {
     "src": "img20250125164808",
     "alt": {
@@ -187,32 +242,15 @@
     "sensitive": true,
     "cropNote": "Кадрування зліва — священник з кадилом, без облич родини"
   },
-  "poslugy.psaltyr-synhumator": {
+  "poslugy.psaltyr-synhumator.altar": {
     "src": "20250830_101556",
     "alt": {
-      "uk": "Зал прощання — ікони, хрест, прапори для читання Псалтиря",
-      "ru": "Зал прощания — иконы, крест, флаги для чтения Псалтыря"
+      "uk": "Сакральний простір залу прощання — ікони і хрест",
+      "ru": "Сакральное пространство зала прощания — иконы и крест"
     },
     "objectPosition": "center 25%",
     "sensitive": true,
-    "cropNote": "Кадрування верхньої частини — лише сакральний простір (ікони, хрест), без труни"
-  },
-  "poslugy.orkestr": {
-    "src": "img_2057",
-    "alt": {
-      "uk": "Урочиста ритуальна церемонія — почесна варта",
-      "ru": "Торжественная ритуальная церемония — почётный караул"
-    },
-    "objectPosition": "center 40%",
-    "cropNote": "Тимчасово — почесна варта як символ урочистості. Бажано замінити на фото духового оркестру"
-  },
-  "poslugy.pomynalnyi-obid": {
-    "src": null,
-    "alt": {
-      "uk": "Поминальний обід — накритий стіл",
-      "ru": "Поминальный обед — накрытый стол"
-    },
-    "todo": "Потрібне фото накритого поминального столу — стокове (Unsplash: 'funeral meal table') або власна зйомка"
+    "cropNote": "Кадрування верхньої частини — лише сакральний простір, без труни"
   },
 
   "tovary.truny": {
@@ -232,28 +270,99 @@
     "objectPosition": "center"
   },
   "tovary.khresty": {
-    "src": null,
+    "src": "stock-wooden-cross",
     "alt": {
-      "uk": "Дерев'яні ритуальні хрести",
-      "ru": "Деревянные ритуальные кресты"
+      "uk": "Дерев'яний хрест на могилі взимку — традиційний православний",
+      "ru": "Деревянный крест на могиле зимой — традиционный православный"
     },
-    "todo": "Потрібна власна зйомка хрестів"
+    "objectPosition": "center 40%",
+    "stock": {
+      "source": "Pexels",
+      "author": "Karola G",
+      "page": "https://www.pexels.com/photo/6769912/",
+      "license": "Pexels License"
+    }
+  },
+  "tovary.khresty.alt": {
+    "src": "stock-wooden-cross-flowers",
+    "alt": {
+      "uk": "Дерев'яний хрест з квітами на кладовищі",
+      "ru": "Деревянный крест с цветами на кладбище"
+    },
+    "stock": {
+      "source": "Pexels",
+      "author": "Shox",
+      "page": "https://www.pexels.com/photo/34351057/",
+      "license": "Pexels License"
+    }
   },
   "tovary.odiah": {
-    "src": null,
+    "src": "stock-formal-suit",
     "alt": {
-      "uk": "Ритуальний одяг",
-      "ru": "Ритуальная одежда"
+      "uk": "Ритуальний чорний костюм — формальний одяг",
+      "ru": "Ритуальный чёрный костюм — формальная одежда"
     },
-    "todo": "Потрібна власна зйомка одягу"
+    "objectPosition": "center",
+    "stock": {
+      "source": "Pexels",
+      "author": "Raana Jenab",
+      "page": "https://www.pexels.com/photo/32392072/",
+      "license": "Pexels License"
+    },
+    "cropNote": "На фото краватка і хустка — символи формального ритуального одягу. Бажано доповнити крупним планом костюма/плаття"
+  },
+  "tovary.odiah.alt": {
+    "src": "stock-suit-hanger",
+    "alt": {
+      "uk": "Чорний костюм на вішаку",
+      "ru": "Чёрный костюм на вешалке"
+    },
+    "stock": {
+      "source": "Pexels",
+      "author": "Filip Sestrenek",
+      "page": "https://www.pexels.com/photo/11474337/",
+      "license": "Pexels License"
+    }
   },
   "tovary.aksesuary": {
-    "src": "20240218_093345",
+    "src": "stock-church-candles",
     "alt": {
-      "uk": "Ритуальні аксесуари — свічки, ікони",
-      "ru": "Ритуальные аксессуары — свечи, иконы"
+      "uk": "Церковні свічки — ритуальні аксесуари",
+      "ru": "Церковные свечи — ритуальные аксессуары"
     },
-    "todo": "Бажано власна зйомка свічок/ікон крупним планом"
+    "objectPosition": "center 60%",
+    "stock": {
+      "source": "Pexels",
+      "author": "Emre Akyol",
+      "page": "https://www.pexels.com/photo/17841194/",
+      "license": "Pexels License"
+    }
+  },
+  "tovary.aksesuary.icon": {
+    "src": "stock-orthodox-icon",
+    "alt": {
+      "uk": "Православна ікона Богородиці",
+      "ru": "Православная икона Богородицы"
+    },
+    "stock": {
+      "source": "Pexels",
+      "author": "Ron Lach",
+      "page": "https://www.pexels.com/photo/10618918/",
+      "license": "Pexels License"
+    }
+  },
+  "tovary.aksesuary.cross-candle": {
+    "src": "stock-cross-candle-table",
+    "alt": {
+      "uk": "Хрест, дароносиця і свічка — церковне приладдя",
+      "ru": "Крест, дароносица и свеча — церковные принадлежности"
+    },
+    "stock": {
+      "source": "Unsplash",
+      "author": "Maegan Martin",
+      "page": "https://unsplash.com/photos/u_BxRvxX6aQ",
+      "license": "Unsplash License"
+    }
   },
 
   "tovary.vinky.cat1": { "src": "20240216_093222", "alt": { "uk": "Кошик червоних троянд", "ru": "Корзина красных роз" } },

@@ -10,7 +10,8 @@
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,json,md,css}\"",
     "typecheck": "tsc --noEmit",
-    "optimize:images": "node scripts/optimize-images.mjs"
+    "optimize:images": "node scripts/optimize-images.mjs",
+    "download:stock": "node scripts/download-stock.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
