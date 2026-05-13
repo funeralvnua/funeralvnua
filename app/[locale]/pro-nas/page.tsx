@@ -111,68 +111,71 @@ export default async function AboutPage({
 
   return (
     <>
-      <section className="hero-gradient relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <RitualImage
-            photoKey="pronas.hero"
-            variant="hero"
-            priority
-            className="h-full w-full"
-            imgClassName="opacity-20 md:opacity-30"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[--color-surface] via-[--color-surface]/85 to-[--color-surface]/40" />
-        </div>
-        <div className="container-content py-10 md:py-16">
-          <Breadcrumbs
-            items={[
-              { label: tNav('home'), href: '/' },
-              { label: tNav('about'), href: '/pro-nas/' },
-            ]}
-          />
-          <div className="mt-6 max-w-3xl">
-            <h1>
-              {isUk
-                ? 'Допомагаємо родинам Вінниці у скорботні дні'
-                : 'Помогаем семьям Винницы в дни скорби'}
-            </h1>
-            <div className="divider-gold mt-6 max-w-[80px]" />
-            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-              {isUk
-                ? 'Понад 25 років наша служба супроводжує родини Вінниці й області у найважчі моменти життя. Ми робимо все можливе, щоб прощання з близькими пройшло гідно та з повагою.'
-                : 'Более 25 лет наша служба сопровождает семьи Винницы и области в самые тяжёлые моменты жизни. Мы делаем всё возможное, чтобы прощание с близкими прошло достойно и с уважением.'}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="container-content py-10 md:py-16">
+      {/* Hero — фото на повну ширину зверху */}
+      <section className="relative isolate">
         <RitualImage
-          photoKey="pronas.team"
+          photoKey="pronas.hero"
           variant="hero"
+          priority
           aspectRatio="21 / 9"
-          className="rounded-2xl shadow-sm"
+          className="h-[45vh] min-h-[300px] w-full md:h-[55vh] md:min-h-[420px]"
         />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[--color-bg] via-[--color-bg]/30 to-transparent" />
       </section>
 
-      <section className="container-content py-10 md:py-16">
-        <h2 className="font-heading text-2xl font-medium md:text-3xl">
-          {isUk ? 'Наші принципи' : 'Наши принципы'}
-        </h2>
-        <div className="divider-gold mt-4 max-w-[60px]" />
+      <section className="container-content py-10 md:py-14">
+        <Breadcrumbs
+          items={[
+            { label: tNav('home'), href: '/' },
+            { label: tNav('about'), href: '/pro-nas/' },
+          ]}
+        />
+        <div className="mt-6 max-w-3xl">
+          <h1>
+            {isUk
+              ? 'Допомагаємо родинам Вінниці у скорботні дні'
+              : 'Помогаем семьям Винницы в дни скорби'}
+          </h1>
+          <div className="divider-gold mt-6 max-w-[80px]" />
+          <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
+            {isUk
+              ? 'Понад 25 років наша служба супроводжує родини Вінниці й області у найважчі моменти життя. Ми робимо все можливе, щоб прощання з близькими пройшло гідно та з повагою.'
+              : 'Более 25 лет наша служба сопровождает семьи Винницы и области в самые тяжёлые моменты жизни. Мы делаем всё возможное, чтобы прощание с близкими прошло достойно и с уважением.'}
+          </p>
+        </div>
+      </section>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map(({ Icon, title, text }) => (
-            <div
-              key={title}
-              className="rounded-2xl border border-[--color-border] bg-[--color-surface] p-6 transition-colors hover:border-[--color-accent]/50"
-            >
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
-                <Icon className="h-5 w-5 text-[--color-accent]" aria-hidden />
-              </div>
-              <h3 className="mt-5 text-lg font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-[--color-ink-soft]">{text}</p>
+      {/* Принципи + фото команди поряд */}
+      <section className="container-content py-10 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14 lg:items-start">
+          <div>
+            <h2 className="font-heading text-2xl font-medium md:text-3xl">
+              {isUk ? 'Наші принципи' : 'Наши принципы'}
+            </h2>
+            <div className="divider-gold mt-4 max-w-[60px]" />
+
+            <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
+              {values.map(({ Icon, title, text }) => (
+                <div
+                  key={title}
+                  className="rounded-2xl border border-[--color-border] bg-[--color-surface] p-6 transition-colors hover:border-[--color-accent]/50"
+                >
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
+                    <Icon className="h-5 w-5 text-[--color-accent]" aria-hidden />
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm text-[--color-ink-soft]">{text}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <RitualImage
+            photoKey="pronas.team"
+            variant="card"
+            aspectRatio="4 / 5"
+            className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-[--color-border] lg:sticky lg:top-24"
+          />
         </div>
       </section>
 
