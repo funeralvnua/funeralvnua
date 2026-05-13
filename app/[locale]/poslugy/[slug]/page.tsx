@@ -13,6 +13,8 @@ import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedServices } from '@/components/sections/RelatedServices';
 import { CallbackForm } from '@/components/sections/CallbackForm';
+import { RitualImage } from '@/components/ui/RitualImage';
+import { getPhoto } from '@/lib/photos';
 import { jsonLdScript, getLocalBusinessSchema } from '@/lib/schema';
 import { SITE, buildUrl } from '@/lib/utils';
 
@@ -119,10 +121,25 @@ export default async function ServicePage({
       }
     : null;
 
+  const photoKey = `poslugy.${slug}`;
+  const hasPhoto = getPhoto(photoKey) !== null;
+
   return (
     <article>
       {/* Hero */}
-      <section className="hero-gradient">
+      <section className="hero-gradient relative overflow-hidden">
+        {hasPhoto && (
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <RitualImage
+              photoKey={photoKey}
+              variant="hero"
+              priority
+              className="h-full w-full"
+              imgClassName="opacity-15 md:opacity-25"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[--color-surface] via-[--color-surface]/85 to-[--color-surface]/40" />
+          </div>
+        )}
         <div className="container-content py-10 md:py-14">
           <Breadcrumbs
             items={[

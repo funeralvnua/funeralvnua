@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 import { Phone, Check } from 'lucide-react';
 import { CallbackForm } from './CallbackForm';
+import { RitualImage } from '@/components/ui/RitualImage';
 import { SITE } from '@/lib/utils';
 
 export function Hero() {
@@ -9,10 +10,21 @@ export function Hero() {
 
   return (
     <section className="hero-gradient relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <RitualImage
+          photoKey="home.hero"
+          variant="hero"
+          priority
+          className="h-full w-full"
+          imgClassName="opacity-15 md:opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[--color-surface] via-[--color-surface]/85 to-[--color-surface]/40" />
+      </div>
+
       <div className="container-content py-14 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 md:items-start">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-border] bg-[--color-surface] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-border] bg-[--color-surface]/90 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent] backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-[--color-accent]" aria-hidden />
               24/7 · Вінниця та область
             </span>

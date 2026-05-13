@@ -4,6 +4,7 @@ import { ShieldCheck, Award, Users, Heart } from 'lucide-react';
 import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
+import { RitualImage } from '@/components/ui/RitualImage';
 import { buildUrl, SITE } from '@/lib/utils';
 
 export function generateStaticParams() {
@@ -96,7 +97,17 @@ export default async function AboutPage({
 
   return (
     <>
-      <section className="hero-gradient">
+      <section className="hero-gradient relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <RitualImage
+            photoKey="pronas.hero"
+            variant="hero"
+            priority
+            className="h-full w-full"
+            imgClassName="opacity-20 md:opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[--color-surface] via-[--color-surface]/85 to-[--color-surface]/40" />
+        </div>
         <div className="container-content py-10 md:py-16">
           <Breadcrumbs
             items={[
@@ -118,6 +129,15 @@ export default async function AboutPage({
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="container-content py-10 md:py-16">
+        <RitualImage
+          photoKey="pronas.team"
+          variant="hero"
+          aspectRatio="21 / 9"
+          className="rounded-2xl shadow-sm"
+        />
       </section>
 
       <section className="container-content py-10 md:py-16">

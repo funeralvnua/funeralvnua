@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import { ShieldCheck, Clock, Wallet, Award } from 'lucide-react';
+import { RitualImage } from '@/components/ui/RitualImage';
 
 export function Trust() {
   const t = useTranslations('trust');
@@ -16,10 +17,18 @@ export function Trust() {
       aria-labelledby="trust-heading"
       className="container-content py-16 md:py-24"
     >
-      <div className="max-w-3xl">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--color-accent]">
-          {t('title')}
-        </span>
+      <div className="grid gap-10 md:grid-cols-[1fr_1fr] md:items-end">
+        <div>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--color-accent]">
+            {t('title')}
+          </span>
+        </div>
+        <RitualImage
+          photoKey="home.trust"
+          variant="card"
+          aspectRatio="16 / 10"
+          className="hidden rounded-2xl shadow-sm md:block"
+        />
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

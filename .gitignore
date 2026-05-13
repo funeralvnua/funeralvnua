@@ -45,3 +45,6 @@ pnpm-debug.log*
 
 # Claude Code
 .claude/
+
+# Image pipeline (originals not committed)
+raw-photos/
