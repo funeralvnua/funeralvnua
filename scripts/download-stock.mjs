@@ -24,6 +24,32 @@ const STOCK = [
     page: 'https://www.pexels.com/photo/8871516/',
     license: 'Pexels License',
   },
+  {
+    name: 'stock-memorial-dinner',
+    url: 'https://images.pexels.com/photos/6715103/pexels-photo-6715103.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'cottonbro studio',
+    page: 'https://www.pexels.com/photo/6715103/',
+    license: 'Pexels License',
+  },
+  // ─── poslugy.oformlennya-dokumentiv ──────────────────────────
+  {
+    name: 'stock-signing-documents',
+    url: 'https://images.pexels.com/photos/8730977/pexels-photo-8730977.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'Mikhail Nilov',
+    page: 'https://www.pexels.com/photo/8730977/',
+    license: 'Pexels License',
+  },
+  // ─── tovary.odiah (краща версія - сукня на вішаку) ───────────
+  {
+    name: 'stock-black-dress',
+    url: 'https://images.pexels.com/photos/19895955/pexels-photo-19895955.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'marceloverfe',
+    page: 'https://www.pexels.com/photo/19895955/',
+    license: 'Pexels License',
+  },
   // ─── tovary.khresty ───────────────────────────────────────────
   {
     name: 'stock-wooden-cross',

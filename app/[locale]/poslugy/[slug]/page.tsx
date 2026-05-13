@@ -136,21 +136,8 @@ export default async function ServicePage({
 
   return (
     <article>
-      {/* Hero — фото зверху на повну ширину, текст знизу */}
-      {hasPhoto && (
-        <section className="relative isolate">
-          <RitualImage
-            photoKey={photoKey}
-            variant="hero"
-            priority
-            aspectRatio="21 / 9"
-            className="h-[40vh] min-h-[260px] w-full md:h-[50vh] md:min-h-[380px]"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[--color-bg] via-[--color-bg]/30 to-transparent" />
-        </section>
-      )}
-
-      <section className="container-content py-10 md:py-14">
+      {/* Hero — split layout: текст ліворуч, фото-картка праворуч */}
+      <section className="container-content py-8 md:py-12">
         <Breadcrumbs
           items={[
             { label: tNav('home'), href: '/' },
@@ -159,30 +146,44 @@ export default async function ServicePage({
           ]}
         />
 
-        <div className="mt-6 max-w-3xl">
-          <h1>{post.frontmatter.title}</h1>
-          <div className="divider-gold mt-6 max-w-[80px]" />
-          <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-            {post.frontmatter.description}
-          </p>
+        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:items-center">
+          {/* LEFT — заголовок + intro + CTA */}
+          <div>
+            <h1>{post.frontmatter.title}</h1>
+            <div className="divider-gold mt-6 max-w-[80px]" />
+            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
+              {post.frontmatter.description}
+            </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href={`tel:${SITE.phone}`}
-              className="group inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-6 py-3 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
-            >
-              <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
-              {SITE.phoneDisplay}
-            </a>
-            {post.frontmatter.priceFrom && (
-              <span className="text-sm text-[--color-ink-soft]">
-                від{' '}
-                <strong className="font-heading text-2xl text-[--color-accent]">
-                  {post.frontmatter.priceFrom.toLocaleString('uk-UA')} ₴
-                </strong>
-              </span>
-            )}
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href={`tel:${SITE.phone}`}
+                className="group inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-6 py-3 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
+              >
+                <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
+                {SITE.phoneDisplay}
+              </a>
+              {post.frontmatter.priceFrom && (
+                <span className="text-sm text-[--color-ink-soft]">
+                  від{' '}
+                  <strong className="font-heading text-2xl text-[--color-accent]">
+                    {post.frontmatter.priceFrom.toLocaleString('uk-UA')} ₴
+                  </strong>
+                </span>
+              )}
+            </div>
           </div>
+
+          {/* RIGHT — фото-картка */}
+          {hasPhoto && (
+            <RitualImage
+              photoKey={photoKey}
+              variant="hero"
+              priority
+              aspectRatio="4 / 3"
+              className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-[--color-border]"
+            />
+          )}
         </div>
       </section>
 

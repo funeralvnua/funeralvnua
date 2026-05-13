@@ -9,12 +9,26 @@ export function Hero() {
   const tCta = useTranslations('cta');
 
   return (
-    <section className="relative overflow-hidden bg-[--color-bg]">
-      <div className="container-content py-12 md:py-20">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-14 lg:items-center">
-          {/* LEFT — текст + бенефіти + телефон */}
+    <section className="relative isolate overflow-hidden">
+      {/* Full-bleed hero фото */}
+      <div className="absolute inset-0 -z-10">
+        <RitualImage
+          photoKey="home.hero"
+          variant="hero"
+          priority
+          className="h-full w-full"
+        />
+        {/* Сильне затемнення зліва (для тексту) → прозоре справа */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[--color-bg] from-0% via-[--color-bg]/85 via-45% to-[--color-bg]/30 to-100%" />
+        {/* Додатковий fade знизу до фону сторінки */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[--color-bg] to-transparent" />
+      </div>
+
+      <div className="container-content py-16 md:py-24">
+        <div className="grid gap-12 md:grid-cols-2 md:items-start">
+          {/* LEFT — текст на затемненій частині */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-accent]/40 bg-[--color-accent-100] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-accent]/40 bg-[--color-bg]/80 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent] backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-[--color-accent]" aria-hidden />
               24/7 · Вінниця та область
             </span>
@@ -47,15 +61,8 @@ export function Hero() {
             </a>
           </div>
 
-          {/* RIGHT — фото зверху, форма під ним */}
-          <div className="flex flex-col gap-6">
-            <RitualImage
-              photoKey="home.hero"
-              variant="hero"
-              priority
-              aspectRatio="4 / 3"
-              className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-[--color-border]"
-            />
+          {/* RIGHT — форма у непрозорій картці */}
+          <div className="rounded-2xl bg-[--color-surface] p-1 shadow-lg ring-1 ring-[--color-border]">
             <CallbackForm source="hero" />
           </div>
         </div>

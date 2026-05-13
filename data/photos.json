@@ -64,12 +64,18 @@
     "objectPosition": "center"
   },
   "poslugy.oformlennya-dokumentiv": {
-    "src": "20250329_112301",
+    "src": "stock-signing-documents",
     "alt": {
-      "uk": "Ритуальні агенти оформлюють документи",
-      "ru": "Ритуальные агенты оформляют документы"
+      "uk": "Оформлення документів - підпис офіційних паперів",
+      "ru": "Оформление документов - подпись официальных бумаг"
     },
-    "objectPosition": "center 60%"
+    "objectPosition": "center",
+    "stock": {
+      "source": "Pexels",
+      "author": "Mikhail Nilov",
+      "page": "https://www.pexels.com/photo/8730977/",
+      "license": "Pexels License"
+    }
   },
   "poslugy.rytualna-bryhada": {
     "src": "20250329_111917",
@@ -188,13 +194,18 @@
     }
   },
   "poslugy.pomynalnyi-obid": {
-    "src": "img20250418191741",
+    "src": "stock-memorial-dinner",
     "alt": {
-      "uk": "Поминальний обід - тепла родинна атмосфера",
-      "ru": "Поминальный обед - тёплая семейная атмосфера"
+      "uk": "Поминальний обід - накритий стіл при свічках у теплій атмосфері",
+      "ru": "Поминальный обед - накрытый стол при свечах в тёплой атмосфере"
     },
     "objectPosition": "center 50%",
-    "cropNote": "Атмосферне теплий захід сонця - символ родинного збирання після прощання. ДОДАТИ ПОТІМ власне фото накритого столу"
+    "stock": {
+      "source": "Pexels",
+      "author": "cottonbro studio",
+      "page": "https://www.pexels.com/photo/6715103/",
+      "license": "Pexels License"
+    }
   },
   "poslugy.repatriatsiya": {
     "src": "img20250125164808",
@@ -301,19 +312,18 @@
     }
   },
   "tovary.odiah": {
-    "src": "stock-formal-suit",
+    "src": "stock-black-dress",
     "alt": {
-      "uk": "Ритуальний чорний костюм - формальний одяг",
-      "ru": "Ритуальный чёрный костюм - формальная одежда"
+      "uk": "Ритуальний одяг - чорна сукня на вішаку",
+      "ru": "Ритуальная одежда - чёрное платье на вешалке"
     },
-    "objectPosition": "center",
+    "objectPosition": "center 40%",
     "stock": {
       "source": "Pexels",
-      "author": "Raana Jenab",
-      "page": "https://www.pexels.com/photo/32392072/",
+      "author": "marceloverfe",
+      "page": "https://www.pexels.com/photo/19895955/",
       "license": "Pexels License"
-    },
-    "cropNote": "На фото краватка і хустка - символи формального ритуального одягу. Бажано доповнити крупним планом костюма/плаття"
+    }
   },
   "tovary.odiah.alt": {
     "src": "stock-suit-hanger",
