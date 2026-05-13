@@ -187,7 +187,7 @@ export default async function GuidePage({
             )}
           </div>
 
-          {/* Sidebar — CTA */}
+          {/* Sidebar - CTA */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-2xl border border-[--color-accent]/40 bg-[--color-accent-100] p-6">
               <h3 className="font-heading text-xl text-[--color-ink]">

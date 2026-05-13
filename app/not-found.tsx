@@ -1,4 +1,4 @@
-// Top-level not-found — потрапляють сюди лише запити поза локалями.
+// Top-level not-found - потрапляють сюди лише запити поза локалями.
 // next-intl сам обробляє локалізовані not-found через [locale]/not-found.tsx.
 
 import Link from 'next/link';
@@ -18,7 +18,7 @@ export default function NotFound() {
         <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Сторінку не знайдено</h1>
         <p>
           <Link href="/" style={{ color: '#2c4a3e' }}>
-            Повернутись на головну →
+            Повернутись на головну -
           </Link>
         </p>
       </body>

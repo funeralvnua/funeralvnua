@@ -6,8 +6,9 @@ import { Button } from '@/components/ui/Button';
 import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
+import { RitualImage } from '@/components/ui/RitualImage';
 import { jsonLdScript } from '@/lib/schema';
-import { ogImageFor } from '@/lib/photos';
+import { getPhoto, ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl, cn } from '@/lib/utils';
 import packages from '@/data/packages.json';
 
@@ -23,8 +24,8 @@ export async function generateMetadata({
   const { locale } = await params;
   const isUk = locale === 'uk';
   const title = isUk
-    ? 'Ціни на ритуальні послуги у Вінниці — пакети та прайс'
-    : 'Цены на ритуальные услуги в Виннице — пакеты и прайс';
+    ? 'Ціни на ритуальні послуги у Вінниці - пакети та прайс'
+    : 'Цены на ритуальные услуги в Виннице - пакеты и прайс';
   const description = isUk
     ? 'Прозорі ціни на ритуальні послуги у Вінниці. Пакети Економ (12 000 ₴), Стандарт (20 000 ₴), Еліт (від 45 000 ₴). Без прихованих платежів.'
     : 'Прозрачные цены на ритуальные услуги в Виннице. Пакеты Эконом (12 000 ₴), Стандарт (20 000 ₴), Элит (от 45 000 ₴). Без скрытых платежей.';
@@ -74,8 +75,8 @@ export default async function PricesPage({
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: isUk
-      ? 'Ритуальні послуги — пакети у Вінниці'
-      : 'Ритуальные услуги — пакеты в Виннице',
+      ? 'Ритуальні послуги - пакети у Вінниці'
+      : 'Ритуальные услуги - пакеты в Виннице',
     provider: {
       '@type': 'FuneralHome',
       name: isUk
@@ -119,66 +120,86 @@ export default async function PricesPage({
 
       {/* Packages */}
       <section className="container-content py-10 md:py-16">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {packages.map((p) => (
-            <article
-              key={p.slug}
-              className={cn(
-                'relative flex flex-col rounded-2xl border p-7 md:p-8',
-                p.highlighted
-                  ? 'border-[--color-accent] bg-[--color-surface-elev] shadow-[var(--shadow-glow)]'
-                  : 'border-[--color-border] bg-[--color-surface]',
-              )}
-            >
-              {p.highlighted && (
-                <span className="absolute -top-3 left-7 rounded-full bg-[--color-accent] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[--color-bg]">
-                  {tPkg('popular')}
-                </span>
-              )}
-              <h2 className="font-heading text-3xl text-[--color-ink]">{p.title[loc]}</h2>
-              <p className="mt-1 text-sm text-[--color-ink-muted]">{p.subtitle[loc]}</p>
-
-              <div className="mt-5 flex items-baseline gap-1">
-                {p.priceFrom && (
-                  <span className="text-sm text-[--color-ink-soft]">{tPkg('from')}</span>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {packages.map((p) => {
+            const photoKey = `tsiny.${p.slug}`;
+            const hasPhoto = getPhoto(photoKey) !== null;
+            return (
+              <article
+                key={p.slug}
+                className={cn(
+                  'group relative flex flex-col overflow-hidden rounded-2xl border',
+                  p.highlighted
+                    ? 'border-[--color-accent] bg-[--color-surface-elev] shadow-[var(--shadow-glow)]'
+                    : 'border-[--color-border] bg-[--color-surface]',
                 )}
-                <span className="font-heading text-5xl font-medium text-[--color-ink]">
-                  {p.price.toLocaleString('uk-UA')}
-                </span>
-                <span className="text-xl text-[--color-ink-soft]">{tPkg('currency')}</span>
-              </div>
-
-              <div className="divider-gold mt-6 max-w-[60px]" />
-
-              <ul className="mt-6 flex-1 space-y-3 text-sm">
-                {p.includes[loc].map((item) => (
-                  <li key={item} className="flex items-start gap-2.5">
-                    <Check
-                      className="mt-0.5 h-4 w-4 shrink-0 text-[--color-accent]"
-                      aria-hidden
-                    />
-                    <span className="text-[--color-ink-soft]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                asChild
-                variant={p.highlighted ? 'accent' : 'outline'}
-                className="mt-7 w-full"
               >
-                <a href={`tel:${SITE.phone}`}>{isUk ? 'Замовити пакет' : 'Заказать пакет'}</a>
-              </Button>
-            </article>
-          ))}
+                {/* Фото банер */}
+                {hasPhoto && (
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-[--color-surface-alt]">
+                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                      <RitualImage
+                        photoKey={photoKey}
+                        variant="card"
+                        className="h-full w-full"
+                      />
+                    </div>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    {p.highlighted && (
+                      <span className="absolute right-4 top-4 rounded-full bg-[--color-accent] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[--color-bg]">
+                        {tPkg('popular')}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex flex-1 flex-col p-7 md:p-8">
+                  <h2 className="font-heading text-3xl text-[--color-ink]">{p.title[loc]}</h2>
+                  <p className="mt-1 text-sm text-[--color-ink-muted]">{p.subtitle[loc]}</p>
+
+                  <div className="mt-5 flex items-baseline gap-1">
+                    {p.priceFrom && (
+                      <span className="text-sm text-[--color-ink-soft]">{tPkg('from')}</span>
+                    )}
+                    <span className="font-heading text-5xl font-medium text-[--color-ink]">
+                      {p.price.toLocaleString('uk-UA')}
+                    </span>
+                    <span className="text-xl text-[--color-ink-soft]">{tPkg('currency')}</span>
+                  </div>
+
+                  <div className="divider-gold mt-6 max-w-[60px]" />
+
+                  <ul className="mt-6 flex-1 space-y-3 text-sm">
+                    {p.includes[loc].map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <Check
+                          className="mt-0.5 h-4 w-4 shrink-0 text-[--color-accent]"
+                          aria-hidden
+                        />
+                        <span className="text-[--color-ink-soft]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Button
+                    asChild
+                    variant={p.highlighted ? 'accent' : 'outline'}
+                    className="mt-7 w-full"
+                  >
+                    <a href={`tel:${SITE.phone}`}>{isUk ? 'Замовити пакет' : 'Заказать пакет'}</a>
+                  </Button>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
-      {/* Додаткові послуги — прайс */}
+      {/* Додаткові послуги - прайс */}
       <section className="bg-[--color-surface-alt] py-10 md:py-16">
         <div className="container-content">
           <h2 className="font-heading text-2xl font-medium md:text-3xl">
-            {isUk ? 'Додаткові послуги — прайс' : 'Дополнительные услуги — прайс'}
+            {isUk ? 'Додаткові послуги - прайс' : 'Дополнительные услуги - прайс'}
           </h2>
           <div className="divider-gold mt-4 max-w-[60px]" />
 
@@ -252,19 +273,19 @@ export default async function PricesPage({
         <div className="rounded-2xl border border-[--color-accent]/40 bg-[--color-accent-100] p-7 md:p-10">
           <h2 className="font-heading text-2xl font-medium md:text-3xl">
             {isUk
-              ? 'Безкоштовне поховання — для кого?'
-              : 'Бесплатное погребение — для кого?'}
+              ? 'Безкоштовне поховання - для кого?'
+              : 'Бесплатное погребение - для кого?'}
           </h2>
           <p className="mt-4 text-base text-[--color-ink-soft]">
             {isUk
-              ? 'Для учасників бойових дій, ветеранів АТО/ООС, інвалідів війни та родин загиблих захисників — повний цикл ритуальних послуг здійснюється безкоштовно за державний кошт.'
-              : 'Для участников боевых действий, ветеранов АТО/ООС, инвалидов войны и семей погибших защитников — полный цикл ритуальных услуг осуществляется бесплатно за государственный счёт.'}
+              ? 'Для учасників бойових дій, ветеранів АТО/ООС, інвалідів війни та родин загиблих захисників - повний цикл ритуальних послуг здійснюється безкоштовно за державний кошт.'
+              : 'Для участников боевых действий, ветеранов АТО/ООС, инвалидов войны и семей погибших защитников - полный цикл ритуальных услуг осуществляется бесплатно за государственный счёт.'}
           </p>
           <Link
             href="/poslugy/viyskove-pokhovannya/"
             className="mt-5 inline-flex items-center gap-1.5 font-semibold text-[--color-accent] hover:text-[--color-accent-700]"
           >
-            {isUk ? 'Деталі — Військове поховання' : 'Детали — Военные похороны'} →
+            {isUk ? 'Деталі - Військове поховання' : 'Детали - Военные похороны'} -
           </Link>
         </div>
       </section>
@@ -279,8 +300,8 @@ export default async function PricesPage({
             <div className="divider-gold mt-4 max-w-[60px]" />
             <p className="mt-4 text-base text-[--color-ink-soft]">
               {isUk
-                ? 'Зателефонуйте — розрахуємо точну вартість під ваші потреби. Без зобовʼязань.'
-                : 'Позвоните — рассчитаем точную стоимость под ваши нужды. Без обязательств.'}
+                ? 'Зателефонуйте - розрахуємо точну вартість під ваші потреби. Без зобовʼязань.'
+                : 'Позвоните - рассчитаем точную стоимость под ваши нужды. Без обязательств.'}
             </p>
             <a
               href={`tel:${SITE.phone}`}

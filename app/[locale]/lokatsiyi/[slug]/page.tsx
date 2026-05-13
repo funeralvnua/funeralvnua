@@ -31,8 +31,8 @@ export async function generateMetadata({
   const isUk = locale === 'uk';
   const subPath = `lokatsiyi/${slug}`;
   const title = isUk
-    ? `${office.title.uk} — ритуальна служба Вінниця`
-    : `${office.title.ru} — ритуальная служба Винница`;
+    ? `${office.title.uk} - ритуальна служба Вінниця`
+    : `${office.title.ru} - ритуальная служба Винница`;
 
   const og = ogImageFor(`office.${slug}`, SITE.url);
 
@@ -178,7 +178,7 @@ export default async function OfficePage({
                 rel="noopener noreferrer"
                 className="text-[--color-accent] hover:text-[--color-accent-700]"
               >
-                {isUk ? 'Прокласти маршрут на OpenStreetMap →' : 'Проложить маршрут на OpenStreetMap →'}
+                {isUk ? 'Прокласти маршрут на OpenStreetMap -' : 'Проложить маршрут на OpenStreetMap -'}
               </a>
             </p>
           </div>

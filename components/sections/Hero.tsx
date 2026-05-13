@@ -9,22 +9,25 @@ export function Hero() {
   const tCta = useTranslations('cta');
 
   return (
-    <section className="hero-gradient relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 -z-10">
+    <section className="relative isolate overflow-hidden">
+      {/* Full-bleed фото на фоні */}
+      <div className="absolute inset-0 -z-10">
         <RitualImage
           photoKey="home.hero"
           variant="hero"
           priority
           className="h-full w-full"
-          imgClassName="opacity-15 md:opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[--color-surface] via-[--color-surface]/85 to-[--color-surface]/40" />
+        {/* Сильний теплий overlay - зліва глибокий, справа прозоріший */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[--color-bg] via-[--color-bg]/90 to-[--color-bg]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[--color-bg] via-transparent to-transparent" />
       </div>
 
-      <div className="container-content py-14 md:py-24">
+      <div className="container-content py-16 md:py-24">
         <div className="grid gap-12 md:grid-cols-2 md:items-start">
+          {/* LEFT - текст поверх затемненої частини фото */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-border] bg-[--color-surface]/90 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent] backdrop-blur-sm">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[--color-accent]/40 bg-[--color-bg]/80 px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-[--color-accent] backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-[--color-accent]" aria-hidden />
               24/7 · Вінниця та область
             </span>
@@ -49,7 +52,7 @@ export function Hero() {
             <a
               href={`tel:${SITE.phone}`}
               className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-7 py-4 text-base font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
-              aria-label={`${tCta('callNow')} — ${SITE.phoneDisplay}`}
+              aria-label={`${tCta('callNow')} - ${SITE.phoneDisplay}`}
             >
               <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
               <span>{tCta('callNow')}</span>
@@ -57,7 +60,10 @@ export function Hero() {
             </a>
           </div>
 
-          <CallbackForm source="hero" />
+          {/* RIGHT - форма у непрозорій картці */}
+          <div className="rounded-2xl bg-[--color-surface]/95 p-1 shadow-lg backdrop-blur-sm ring-1 ring-[--color-border]">
+            <CallbackForm source="hero" />
+          </div>
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ interface Props {
 }
 
 /**
- * Async server component — fetches related posts metadata from MDX content.
+ * Async server component - fetches related posts metadata from MDX content.
  * Used at the bottom of articles for cross-linking.
  */
 export async function RelatedArticles({ type, slugs }: Props) {

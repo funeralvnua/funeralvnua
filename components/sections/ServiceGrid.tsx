@@ -26,6 +26,8 @@ import {
 } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import services from '@/data/services.json';
+import { RitualImage } from '@/components/ui/RitualImage';
+import { getPhoto } from '@/lib/photos';
 import type { Locale } from '@/i18n/routing';
 
 const ICON_MAP: Record<string, LucideIcon> = {
@@ -75,7 +77,7 @@ export function ServiceGrid() {
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--color-accent]">
           {t('title')}
         </span>
-        <h2 className="mt-3">{t('subtitle')}</h2>
+        <h2 id="services-heading" className="mt-3">{t('subtitle')}</h2>
       </div>
 
       <div className="mt-14 space-y-16">
@@ -90,31 +92,51 @@ export function ServiceGrid() {
                 <div className="divider-gold flex-1" />
               </div>
 
-              <ul className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((s) => {
                   const IconComponent = ICON_MAP[s.icon] ?? Circle;
+                  const photoKey = `poslugy.${s.slug}`;
+                  const hasPhoto = getPhoto(photoKey) !== null;
                   return (
                     <li key={s.slug}>
                       <Link
                         href={`/poslugy/${s.slug}/`}
-                        className="card-hover group block h-full rounded-xl border border-[--color-border] bg-[--color-surface] p-6"
+                        className="card-hover group flex h-full flex-col overflow-hidden rounded-2xl border border-[--color-border] bg-[--color-surface]"
                       >
-                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
-                          <IconComponent
-                            className="h-5 w-5 text-[--color-accent]"
-                            aria-hidden
-                          />
+                        {/* Фото-банер */}
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-[--color-surface-alt]">
+                          {hasPhoto && (
+                            <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                              <RitualImage
+                                photoKey={photoKey}
+                                variant="card"
+                                className="h-full w-full"
+                              />
+                            </div>
+                          )}
+                          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                          {/* Іконка-бейдж */}
+                          <div className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[--color-surface]/95 backdrop-blur-sm ring-1 ring-[--color-border]">
+                            <IconComponent
+                              className="h-5 w-5 text-[--color-accent]"
+                              aria-hidden
+                            />
+                          </div>
                         </div>
-                        <h4 className="mt-4 text-lg font-semibold text-[--color-ink]">
-                          {s.title[locale]}
-                        </h4>
-                        <p className="mt-2 text-sm text-[--color-ink-soft]">
-                          {s.intro[locale]}
-                        </p>
-                        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[--color-accent]">
-                          {tCta('learnMore')}
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
-                        </span>
+
+                        {/* Тіло */}
+                        <div className="flex flex-1 flex-col p-6">
+                          <h4 className="text-lg font-semibold text-[--color-ink]">
+                            {s.title[locale]}
+                          </h4>
+                          <p className="mt-2 text-sm text-[--color-ink-soft]">
+                            {s.intro[locale]}
+                          </p>
+                          <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[--color-accent]">
+                            {tCta('learnMore')}
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
+                          </span>
+                        </div>
                       </Link>
                     </li>
                   );

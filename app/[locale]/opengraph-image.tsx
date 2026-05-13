@@ -16,8 +16,8 @@ export default async function OpenGraphImage({
     ? 'Вінницька міська ритуальна служба'
     : 'Винницкая городская ритуальная служба';
   const subtitle = isUk
-    ? 'Цілодобова організація поховань — Вінниця та область'
-    : 'Круглосуточная организация похорон — Винница и область';
+    ? 'Цілодобова організація поховань - Вінниця та область'
+    : 'Круглосуточная организация похорон - Винница и область';
   const phone = '(067) 459-78-76';
 
   return new ImageResponse(
@@ -35,7 +35,7 @@ export default async function OpenGraphImage({
           position: 'relative',
         }}
       >
-        {/* Радіальне тінтування — теплий golden glow */}
+        {/* Радіальне тінтування - теплий golden glow */}
         <div
           style={{
             position: 'absolute',
@@ -67,7 +67,7 @@ export default async function OpenGraphImage({
           24/7 · {isUk ? 'Вінниця та область' : 'Винница и область'}
         </div>
 
-        {/* Title — серифом */}
+        {/* Title - серифом */}
         <div
           style={{
             display: 'flex',
@@ -107,7 +107,7 @@ export default async function OpenGraphImage({
           {subtitle}
         </div>
 
-        {/* Phone — внизу */}
+        {/* Phone - внизу */}
         <div
           style={{
             display: 'flex',
