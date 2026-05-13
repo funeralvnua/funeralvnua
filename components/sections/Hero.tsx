@@ -18,12 +18,8 @@ export function Hero() {
           priority
           className="h-full w-full"
         />
-        {/* Базове сильне затемнення усього фото */}
-        <div className="absolute inset-0 bg-[--color-bg]/80" />
-        {/* Додатково — solid dark зліва (текст ще читабельніший) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[--color-bg] from-0% via-[--color-bg]/70 via-50% to-transparent to-100%" />
-        {/* Fade знизу до фону сторінки */}
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[--color-bg] to-transparent" />
+        {/* Чорний overlay 85% — фото залишається ледь видимим текстурним фоном */}
+        <div className="absolute inset-0 bg-black/85" />
       </div>
 
       <div className="container-content py-16 md:py-24">
