@@ -81,6 +81,15 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Tailwind v4 не дає cursor: pointer за замовчуванням. Повертаємо. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  summary,
+  label[for],
+  a[href] {
+    cursor: pointer;
+  }
+
   h1,
   h2 {
     font-family: var(--font-heading);
