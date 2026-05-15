@@ -13,7 +13,8 @@ import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedServices } from '@/components/sections/RelatedServices';
 import { CallbackForm } from '@/components/sections/CallbackForm';
-import { RitualImage } from '@/components/ui/RitualImage';
+import { PageHero } from '@/components/ui/PageHero';
+import { MdxPhoto } from '@/components/ui/MdxPhoto';
 import { getPhoto, ogImageFor } from '@/lib/photos';
 import { jsonLdScript, getLocalBusinessSchema } from '@/lib/schema';
 import { SITE, buildUrl } from '@/lib/utils';
@@ -132,60 +133,44 @@ export default async function ServicePage({
     : null;
 
   const photoKey = `poslugy.${slug}`;
-  const hasPhoto = getPhoto(photoKey) !== null;
+  const altPhotoKey = `${photoKey}.alt`;
+  const hasAltPhoto = getPhoto(altPhotoKey) !== null;
 
   return (
     <article>
-      {/* Hero — split layout: текст ліворуч, фото-картка праворуч */}
-      <section className="container-content py-8 md:py-12">
-        <Breadcrumbs
-          items={[
-            { label: tNav('home'), href: '/' },
-            { label: tNav('services'), href: '/#poslugy' },
-            { label: post.frontmatter.title, href: path },
-          ]}
-        />
-
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:items-center">
-          {/* LEFT — заголовок + intro + CTA */}
-          <div>
-            <h1>{post.frontmatter.title}</h1>
-            <div className="divider-gold mt-6 max-w-[80px]" />
-            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-              {post.frontmatter.description}
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href={`tel:${SITE.phone}`}
-                className="group inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-6 py-3 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
-              >
-                <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
-                {SITE.phoneDisplay}
-              </a>
-              {post.frontmatter.priceFrom && (
-                <span className="text-sm text-[--color-ink-soft]">
-                  від{' '}
-                  <strong className="font-heading text-2xl text-[--color-accent]">
-                    {post.frontmatter.priceFrom.toLocaleString('uk-UA')} ₴
-                  </strong>
-                </span>
-              )}
-            </div>
+      <PageHero
+        photoKey={photoKey}
+        breadcrumbs={
+          <Breadcrumbs
+            items={[
+              { label: tNav('home'), href: '/' },
+              { label: tNav('services'), href: '/#poslugy' },
+              { label: post.frontmatter.title, href: path },
+            ]}
+          />
+        }
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+        cta={
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href={`tel:${SITE.phone}`}
+              className="group inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-6 py-3 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
+            >
+              <Phone className="h-5 w-5 transition-transform group-hover:rotate-12" aria-hidden />
+              {SITE.phoneDisplay}
+            </a>
+            {post.frontmatter.priceFrom && (
+              <span className="text-sm text-[--color-ink-soft]">
+                від{' '}
+                <strong className="font-heading text-2xl text-[--color-accent]">
+                  {post.frontmatter.priceFrom.toLocaleString('uk-UA')} ₴
+                </strong>
+              </span>
+            )}
           </div>
-
-          {/* RIGHT — фото-картка */}
-          {hasPhoto && (
-            <RitualImage
-              photoKey={photoKey}
-              variant="hero"
-              priority
-              aspectRatio="4 / 3"
-              className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-[--color-border]"
-            />
-          )}
-        </div>
-      </section>
+        }
+      />
 
       {/* MDX content + Sidebar form */}
       <section className="container-content py-10 md:py-16">
@@ -204,6 +189,8 @@ export default async function ServicePage({
                 },
               }}
             />
+
+            {hasAltPhoto && <MdxPhoto photoKey={altPhotoKey} />}
 
             {/* FAQ */}
             {post.frontmatter.faq && post.frontmatter.faq.length > 0 && (

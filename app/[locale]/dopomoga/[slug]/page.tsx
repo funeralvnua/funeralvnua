@@ -11,8 +11,9 @@ import type { Locale } from '@/i18n/routing';
 import { getAllSlugs, getPostBySlug } from '@/lib/content';
 import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
+import { PageHero } from '@/components/ui/PageHero';
 import { jsonLdScript } from '@/lib/schema';
-import { ogImageFor } from '@/lib/photos';
+import { getPhoto, ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl } from '@/lib/utils';
 
 type RouteParams = { locale: string; slug: string };
@@ -105,10 +106,13 @@ export default async function HelpPage({
     },
   };
 
+  const photoKey = getPhoto(`dopomoga.${slug}`) ? `dopomoga.${slug}` : 'dopomoga.hero';
+
   return (
     <article>
-      <section className="hero-gradient">
-        <div className="container-content py-10 md:py-14">
+      <PageHero
+        photoKey={photoKey}
+        breadcrumbs={
           <Breadcrumbs
             items={[
               { label: tNav('home'), href: '/' },
@@ -116,16 +120,10 @@ export default async function HelpPage({
               { label: post.frontmatter.title, href: path },
             ]}
           />
-
-          <div className="mt-6 max-w-3xl">
-            <h1>{post.frontmatter.title}</h1>
-            <div className="divider-gold mt-6 max-w-[80px]" />
-            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-              {post.frontmatter.description}
-            </p>
-          </div>
-        </div>
-      </section>
+        }
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+      />
 
       <section className="container-content py-10 md:py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_300px] lg:gap-16">

@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { MapPin, Phone, Clock } from 'lucide-react';
 import { PhoneLink } from '@/components/layout/PhoneLink';
+import { MessengerLinks } from '@/components/layout/MessengerLinks';
 import type { Locale } from '@/i18n/routing';
 import { SITE } from '@/lib/utils';
 
@@ -33,6 +34,7 @@ export function Contacts() {
           <div className="mt-3">
             <PhoneLink source="contacts" variant="large" />
           </div>
+          <MessengerLinks className="mt-4" size="sm" />
           <p className="mt-5 inline-flex items-center gap-2 text-sm text-[--color-ink-soft]">
             <Clock className="h-4 w-4" aria-hidden />
             {t('schedule')}

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { MapPin, Clock, Mail, Phone } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
 import { PhoneLink } from '@/components/layout/PhoneLink';
+import { MessengerLinks } from '@/components/layout/MessengerLinks';
 import { ogImageFor } from '@/lib/photos';
 import { buildUrl, SITE } from '@/lib/utils';
 
@@ -93,23 +94,7 @@ export default async function ContactsPage({
                 <PhoneLink source="contacts-page" variant="large" />
               </div>
 
-              <ul className="mt-5 space-y-2 text-sm">
-                <li className="flex items-center gap-2 text-[--color-ink-soft]">
-                  <Phone className="h-4 w-4 text-[--color-accent]" aria-hidden />
-                  <a href={`tel:${SITE.phoneAlt1}`} className="hover:text-[--color-accent]">
-                    {SITE.phoneAlt1Display}
-                  </a>
-                </li>
-                <li className="flex items-center gap-2 text-[--color-ink-soft]">
-                  <Mail className="h-4 w-4 text-[--color-accent]" aria-hidden />
-                  <a
-                    href={`mailto:${SITE.emailLead}`}
-                    className="hover:text-[--color-accent]"
-                  >
-                    {SITE.emailLead}
-                  </a>
-                </li>
-              </ul>
+              <MessengerLinks className="mt-5" />
 
               <p className="mt-5 inline-flex items-center gap-2 text-sm text-[--color-ink-soft]">
                 <Clock className="h-4 w-4" aria-hidden />

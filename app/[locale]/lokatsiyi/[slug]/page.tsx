@@ -5,6 +5,7 @@ import { MapPin, Clock, Phone } from 'lucide-react';
 import { routing, type Locale } from '@/i18n/routing';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { CallbackForm } from '@/components/sections/CallbackForm';
+import { PageHero } from '@/components/ui/PageHero';
 import { jsonLdScript } from '@/lib/schema';
 import { ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl } from '@/lib/utils';
@@ -104,8 +105,9 @@ export default async function OfficePage({
 
   return (
     <>
-      <section className="hero-gradient">
-        <div className="container-content py-10 md:py-14">
+      <PageHero
+        photoKey={`office.${slug}`}
+        breadcrumbs={
           <Breadcrumbs
             items={[
               { label: tNav('home'), href: '/' },
@@ -113,15 +115,10 @@ export default async function OfficePage({
               { label: office.title[loc], href: `/lokatsiyi/${slug}/` },
             ]}
           />
-          <div className="mt-6 max-w-3xl">
-            <h1>{office.title[loc]}</h1>
-            <div className="divider-gold mt-6 max-w-[80px]" />
-            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-              {office.description[loc]}
-            </p>
-          </div>
-        </div>
-      </section>
+        }
+        title={office.title[loc]}
+        description={office.description[loc]}
+      />
 
       <section className="container-content py-10 md:py-16">
         <div className="grid gap-8 lg:grid-cols-[1fr_360px] lg:gap-16">

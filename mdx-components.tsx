@@ -5,8 +5,10 @@ import type { ComponentProps } from 'react';
 import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { MdxPhoto } from '@/components/ui/MdxPhoto';
 
 export const mdxComponents = {
+  Photo: MdxPhoto,
   h2: ({ className, ...props }: ComponentProps<'h2'>) => (
     <h2
       className={cn(

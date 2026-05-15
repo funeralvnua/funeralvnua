@@ -303,17 +303,17 @@
     "objectPosition": "center"
   },
   "tovary.khresty": {
-    "src": "stock-wooden-cross",
+    "src": "stock-cross-fresh-grass",
     "alt": {
-      "uk": "Дерев'яний хрест на могилі взимку - традиційний православний",
-      "ru": "Деревянный крест на могиле зимой - традиционный православный"
+      "uk": "Новий дерев'яний хрест на зеленій траві - чистий вигляд",
+      "ru": "Новый деревянный крест на зелёной траве - чистый вид"
     },
     "objectPosition": "center 40%",
     "stock": {
-      "source": "Pexels",
-      "author": "Karola G",
-      "page": "https://www.pexels.com/photo/6769912/",
-      "license": "Pexels License"
+      "source": "Unsplash",
+      "author": "John Thomas",
+      "page": "https://unsplash.com/photos/wooden-cross-grass-field",
+      "license": "Unsplash License"
     }
   },
   "tovary.khresty.alt": {

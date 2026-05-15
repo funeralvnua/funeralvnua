@@ -17,9 +17,11 @@ export const SITE = {
   url: SITE_URL,
   phone: process.env.NEXT_PUBLIC_PHONE ?? '+380674597876',
   phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY ?? '(067) 459-78-76',
-  phoneAlt1: '+380734597876',
-  phoneAlt1Display: '(073) 459-78-76',
-  emailLead: 'kp.kkp.vmrs@gmail.com',
+  messengers: {
+    telegram: 'https://t.me/+380674597876',
+    viber: 'viber://chat?number=%2B380674597876',
+    whatsapp: 'https://wa.me/380674597876',
+  },
   addresses: [
     {
       street: 'вул. Євгена Коновальця, 83',

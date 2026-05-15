@@ -12,8 +12,9 @@ import { getAllSlugs, getPostBySlug } from '@/lib/content';
 import { mdxComponents } from '@/mdx-components';
 import { Breadcrumbs } from '@/components/seo/Breadcrumbs';
 import { RelatedArticles } from '@/components/sections/RelatedArticles';
+import { PageHero } from '@/components/ui/PageHero';
 import { jsonLdScript } from '@/lib/schema';
-import { ogImageFor } from '@/lib/photos';
+import { getPhoto, ogImageFor } from '@/lib/photos';
 import { SITE, buildUrl } from '@/lib/utils';
 
 type RouteParams = { locale: string; slug: string };
@@ -133,11 +134,13 @@ export default async function GuidePage({
         }
       : null;
 
+  const photoKey = getPhoto(`poradnyk.${slug}`) ? `poradnyk.${slug}` : 'poradnyk.hero';
+
   return (
     <article>
-      {/* Hero */}
-      <section className="hero-gradient">
-        <div className="container-content py-10 md:py-14">
+      <PageHero
+        photoKey={photoKey}
+        breadcrumbs={
           <Breadcrumbs
             items={[
               { label: tNav('home'), href: '/' },
@@ -145,24 +148,19 @@ export default async function GuidePage({
               { label: post.frontmatter.title, href: path },
             ]}
           />
-
-          <div className="mt-6 max-w-3xl">
-            <h1>{post.frontmatter.title}</h1>
-            <div className="divider-gold mt-6 max-w-[80px]" />
-            <p className="mt-6 text-lg text-[--color-ink-soft] md:text-xl">
-              {post.frontmatter.description}
+        }
+        title={post.frontmatter.title}
+        description={post.frontmatter.description}
+        meta={
+          (post.frontmatter.publishedAt || post.frontmatter.updatedAt) && (
+            <p className="mt-4 text-sm text-[--color-ink-muted]">
+              {post.frontmatter.updatedAt
+                ? `Оновлено: ${new Date(post.frontmatter.updatedAt).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}`
+                : `Опубліковано: ${new Date(post.frontmatter.publishedAt!).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}`}
             </p>
-
-            {(post.frontmatter.publishedAt || post.frontmatter.updatedAt) && (
-              <p className="mt-4 text-sm text-[--color-ink-muted]">
-                {post.frontmatter.updatedAt
-                  ? `Оновлено: ${new Date(post.frontmatter.updatedAt).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}`
-                  : `Опубліковано: ${new Date(post.frontmatter.publishedAt!).toLocaleDateString('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' })}`}
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
+          )
+        }
+      />
 
       {/* Article body */}
       <section className="container-content py-10 md:py-16">

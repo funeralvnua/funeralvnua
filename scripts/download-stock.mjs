@@ -103,6 +103,23 @@ const STOCK = [
     page: 'https://www.pexels.com/photo/8963952/',
     license: 'Pexels License',
   },
+  // ─── tovary.khresty (NEW clean grave cross) ───────────────────
+  {
+    name: 'stock-cross-fresh-grass',
+    url: 'https://images.unsplash.com/photo-1610750093457-b3855a84febc?w=2400&fm=jpg&q=85',
+    source: 'Unsplash',
+    author: 'John Thomas',
+    page: 'https://unsplash.com/photos/wooden-cross-grass-field',
+    license: 'Unsplash License',
+  },
+  {
+    name: 'stock-cross-hilltop',
+    url: 'https://images.unsplash.com/photo-1635604753393-562c902d3239?w=2400&fm=jpg&q=85',
+    source: 'Unsplash',
+    author: 'Kaffeebart',
+    page: 'https://unsplash.com/photos/wooden-cross-on-top-of-hill',
+    license: 'Unsplash License',
+  },
   {
     name: 'stock-wooden-cross-flowers',
     url: 'https://images.pexels.com/photos/34351057/pexels-photo-34351057.jpeg?auto=compress&cs=tinysrgb&w=2400',
