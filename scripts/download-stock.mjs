@@ -50,6 +50,15 @@ const STOCK = [
     page: 'https://www.pexels.com/photo/19895955/',
     license: 'Pexels License',
   },
+  // ─── tovary.odiah (новий: чорний костюм на вішаку - ритуальний) ─
+  {
+    name: 'stock-ritual-suit',
+    url: 'https://images.pexels.com/photos/18453533/pexels-photo-18453533.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'Dominika Polakova',
+    page: 'https://www.pexels.com/photo/18453533/',
+    license: 'Pexels License',
+  },
   // ─── tovary.khresty ───────────────────────────────────────────
   {
     name: 'stock-wooden-cross',
@@ -58,6 +67,23 @@ const STOCK = [
     author: 'Karola G',
     page: 'https://www.pexels.com/photo/6769912/',
     license: 'Pexels License',
+  },
+  // ─── tovary.khresty (workshop product) ────────────────────────
+  {
+    name: 'stock-cross-workshop',
+    url: 'https://images.unsplash.com/photo-1762331876225-6c108a2c6b40?w=2400&fm=jpg&q=85',
+    source: 'Unsplash',
+    author: 'Regös Környei',
+    page: 'https://unsplash.com/photos/many-wooden-crosses',
+    license: 'Unsplash License',
+  },
+  {
+    name: 'stock-cross-table',
+    url: 'https://images.unsplash.com/photo-1689391271009-9cfee05aee14?w=2400&fm=jpg&q=85',
+    source: 'Unsplash',
+    author: 'Julia Taubitz',
+    page: 'https://unsplash.com/photos/wooden-cross-table',
+    license: 'Unsplash License',
   },
   {
     name: 'stock-wooden-cross-flowers',
