@@ -85,6 +85,24 @@ const STOCK = [
     page: 'https://unsplash.com/photos/wooden-cross-table',
     license: 'Unsplash License',
   },
+  // ─── poslugy.pamyatnyky (granite close-up) ────────────────────
+  {
+    name: 'stock-granite-headstone',
+    url: 'https://images.pexels.com/photos/6841240/pexels-photo-6841240.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'RDNE Stock Project',
+    page: 'https://www.pexels.com/photo/6841240/',
+    license: 'Pexels License',
+  },
+  // ─── poslugy.morh-balzamuvannya (symbolic preparation) ────────
+  {
+    name: 'stock-white-lilies-preparation',
+    url: 'https://images.pexels.com/photos/8963952/pexels-photo-8963952.jpeg?auto=compress&cs=tinysrgb&w=2400',
+    source: 'Pexels',
+    author: 'Ivan S.',
+    page: 'https://www.pexels.com/photo/8963952/',
+    license: 'Pexels License',
+  },
   {
     name: 'stock-wooden-cross-flowers',
     url: 'https://images.pexels.com/photos/34351057/pexels-photo-34351057.jpeg?auto=compress&cs=tinysrgb&w=2400',

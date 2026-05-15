@@ -64,12 +64,18 @@
     "cropNote": "Інтер'єр катафалка з труною і відкритими задніми дверима - прямо про процес перевезення"
   },
   "poslugy.morh-balzamuvannya": {
-    "src": "og1a6455",
+    "src": "stock-white-lilies-preparation",
     "alt": {
-      "uk": "Спецтранспорт ритуальної служби з агентами - перевезення з моргу",
-      "ru": "Спецтранспорт ритуальной службы с агентами - перевозка из морга"
+      "uk": "Білі лілії на гранітній плиті - символ гідної підготовки тіла",
+      "ru": "Белые лилии на гранитной плите - символ достойной подготовки тела"
     },
-    "objectPosition": "center 40%"
+    "objectPosition": "center 50%",
+    "stock": {
+      "source": "Pexels",
+      "author": "Ivan S.",
+      "page": "https://www.pexels.com/photo/8963952/",
+      "license": "Pexels License"
+    }
   },
   "poslugy.oformlennya-dokumentiv": {
     "src": "stock-signing-documents",
@@ -241,13 +247,19 @@
     "cropNote": "Renault на лісовій дорозі - нейтральна стримана сцена для делікатної послуги"
   },
   "poslugy.pamyatnyky": {
-    "src": "og1a6435",
+    "src": "stock-granite-headstone",
     "alt": {
-      "uk": "Пам'ятники з портретами на Алеї Героїв - команда служби обабіч",
-      "ru": "Памятники с портретами на Аллее Героев - команда службы рядом"
+      "uk": "Гранітний пам'ятник великим планом - текстура каменя і гравірування",
+      "ru": "Гранитный памятник крупным планом - текстура камня и гравировка"
     },
-    "objectPosition": "center 30%",
-    "cropNote": "Граніт із портретами видно ззаду команди - можна кадрувати top для акценту на пам'ятники"
+    "objectPosition": "center 70%",
+    "stock": {
+      "source": "Pexels",
+      "author": "RDNE Stock Project",
+      "page": "https://www.pexels.com/photo/6841240/",
+      "license": "Pexels License"
+    },
+    "cropNote": "Кадрування на нижню частину - текстура граніту переважає, англомовний текст частково обрізаний. Бажано замінити на власне фото пам'ятника з кириличним гравіруванням"
   },
   "poslugy.prybyrannya-mohyl": {
     "src": "stock-wooden-cross-flowers",
