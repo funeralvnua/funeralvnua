@@ -37,12 +37,6 @@ export function PricePackages() {
                   : 'border-[--color-border] bg-[--color-surface]',
               )}
             >
-              {p.highlighted && (
-                <span className="absolute -top-3 left-7 rounded-full bg-[--color-accent] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[--color-bg]">
-                  {t('popular')}
-                </span>
-              )}
-
               <h3 className="font-heading text-3xl text-[--color-ink]">{p.title[locale]}</h3>
               <p className="mt-1 text-sm text-[--color-ink-muted]">{p.subtitle[locale]}</p>
 
@@ -72,7 +66,7 @@ export function PricePackages() {
 
               <Button
                 asChild
-                variant={p.highlighted ? 'accent' : 'outline'}
+                variant="outline"
                 className="mt-7 w-full"
               >
                 <Link href="/tsiny/">{tCta('viewPrices')}</Link>

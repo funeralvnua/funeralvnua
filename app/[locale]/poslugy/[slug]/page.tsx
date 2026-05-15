@@ -152,7 +152,7 @@ export default async function ServicePage({
         title={post.frontmatter.title}
         description={post.frontmatter.description}
         cta={
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col items-start md:items-end">
             <a
               href={`tel:${SITE.phone}`}
               className="group inline-flex items-center gap-3 rounded-full bg-[--color-emergency] px-6 py-3 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90"
@@ -161,9 +161,9 @@ export default async function ServicePage({
               {SITE.phoneDisplay}
             </a>
             {post.frontmatter.priceFrom && (
-              <span className="text-sm text-[--color-ink-soft]">
+              <span className="flex items-baseline gap-2 text-base text-[--color-ink-soft]">
                 від{' '}
-                <strong className="font-heading text-2xl text-[--color-accent]">
+                <strong className="font-heading text-4xl font-medium leading-none text-[--color-accent] md:text-5xl">
                   {post.frontmatter.priceFrom.toLocaleString('uk-UA')} ₴
                 </strong>
               </span>

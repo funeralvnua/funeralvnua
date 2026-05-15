@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useTranslations, useLocale } from 'next-intl';
-import { Input } from '@/components/ui/Input';
 import { Link } from '@/i18n/navigation';
 import { Check, AlertCircle } from 'lucide-react';
+import { SITE } from '@/lib/utils';
 
 const makeSchema = (t: ReturnType<typeof useTranslations<'form'>>) =>
   z.object({
@@ -16,16 +16,17 @@ const makeSchema = (t: ReturnType<typeof useTranslations<'form'>>) =>
       .string()
       .trim()
       .regex(/^\+?[0-9\s\-()]{10,20}$/, t('invalidPhone')),
-    message: z.string().trim().max(1000).optional(),
     consent: z.literal(true, { errorMap: () => ({ message: t('required') }) }),
     honeypot: z.string().max(0),
   });
 
 interface Props {
   source: string;
+  header?: ReactNode;
+  bare?: boolean;
 }
 
-export function CallbackForm({ source }: Props) {
+export function CallbackForm({ source, header, bare = false }: Props) {
   const t = useTranslations('form');
   const locale = useLocale();
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -59,25 +60,46 @@ export function CallbackForm({ source }: Props) {
     }
   };
 
+  const nameId = `${source}-eda-name`;
+  const phoneId = `${source}-eda-phone`;
+
   return (
     <div
       id={source === 'hero' ? 'callback-form' : undefined}
-      className="rounded-2xl border border-[--color-border] bg-[--color-surface] p-6 shadow-md md:p-8"
+      className={bare ? undefined : 'editorial-form-card'}
     >
-      <h2 className="font-heading text-2xl md:text-3xl">{t('title')}</h2>
-      <div className="divider-gold mt-3 max-w-[40px]" />
-      <p className="mt-3 text-sm text-[--color-ink-soft]">{t('subtitle')}</p>
+      {header ?? (
+        <>
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-[var(--eda-gold,#c9a560)]">
+            {t('editorialEyebrow')}
+          </div>
+
+          <h2 className="mt-3.5 font-heading text-[26px] font-normal leading-[1.15] text-[var(--eda-ink,#f0e6d2)] md:text-[32px]">
+            {t('editorialTitleA')}
+            <br />
+            <span className="font-normal italic text-[var(--eda-gold-bright,#e8c87a)]">
+              {t('editorialTitleB')}
+            </span>
+          </h2>
+
+          <p className="mt-3 text-[13px] font-light leading-[1.5] text-[var(--eda-ink-faint,#8a7f6e)]">
+            {t('editorialSub')}
+          </p>
+        </>
+      )}
 
       {status === 'success' ? (
-        <div className="mt-6 flex items-start gap-3 rounded-md bg-[--color-success]/10 p-4">
-          <Check className="mt-0.5 h-5 w-5 text-[--color-success]" aria-hidden />
-          <div>
-            <p className="font-semibold">{t('successTitle')}</p>
-            <p className="text-sm text-[--color-ink-soft]">{t('successText')}</p>
-          </div>
+        <div className="mt-8 flex flex-col items-center gap-4 py-8">
+          <Check className="h-8 w-8 text-[var(--eda-gold-bright,#e8c87a)]" aria-hidden />
+          <p className="font-heading text-2xl italic text-[var(--eda-gold-bright,#e8c87a)]">
+            {t('successTitle')}
+          </p>
+          <p className="max-w-[280px] text-center text-[13px] leading-[1.55] text-[var(--eda-ink-faint,#8a7f6e)]">
+            {t('successText')}
+          </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-6 space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-8 space-y-5">
           {/* Honeypot */}
           <input
             {...register('honeypot')}
@@ -89,76 +111,108 @@ export function CallbackForm({ source }: Props) {
           />
 
           <div>
-            <label htmlFor={`${source}-name`} className="mb-1 block text-sm font-medium">
-              {t('name')} <span className="text-[--color-danger]">*</span>
+            <label
+              htmlFor={nameId}
+              className="mb-2 block text-[10px] font-medium uppercase tracking-[0.3em] text-[var(--eda-ink-faint,#8a7f6e)]"
+            >
+              {t('name')}
             </label>
-            <Input
-              id={`${source}-name`}
+            <input
+              id={nameId}
               {...register('name')}
               placeholder={t('namePlaceholder')}
-              error={!!errors.name}
-              aria-describedby={errors.name ? `${source}-name-error` : undefined}
+              className="editorial-input"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? `${nameId}-error` : undefined}
             />
             {errors.name && (
-              <p id={`${source}-name-error`} className="mt-1 text-xs text-[--color-danger]">
+              <p
+                id={`${nameId}-error`}
+                className="mt-1.5 font-heading text-[13px] italic text-[var(--color-danger)]"
+              >
                 {errors.name.message}
               </p>
             )}
           </div>
 
           <div>
-            <label htmlFor={`${source}-phone`} className="mb-1 block text-sm font-medium">
-              {t('phone')} <span className="text-[--color-danger]">*</span>
+            <label
+              htmlFor={phoneId}
+              className="mb-2 block text-[10px] font-medium uppercase tracking-[0.3em] text-[var(--eda-ink-faint,#8a7f6e)]"
+            >
+              {t('phone')}
             </label>
-            <Input
-              id={`${source}-phone`}
+            <input
+              id={phoneId}
               {...register('phone')}
               type="tel"
               inputMode="tel"
               placeholder={t('phonePlaceholder')}
-              error={!!errors.phone}
-              aria-describedby={errors.phone ? `${source}-phone-error` : undefined}
+              className="editorial-input"
+              aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? `${phoneId}-error` : undefined}
             />
             {errors.phone && (
-              <p id={`${source}-phone-error`} className="mt-1 text-xs text-[--color-danger]">
+              <p
+                id={`${phoneId}-error`}
+                className="mt-1.5 font-heading text-[13px] italic text-[var(--color-danger)]"
+              >
                 {errors.phone.message}
               </p>
             )}
           </div>
 
-          <label className="flex items-start gap-2.5 text-sm text-[--color-ink-soft]">
+          <label className="flex cursor-pointer select-none items-start gap-3 pt-1 text-[11.5px] leading-[1.55] text-[var(--eda-ink-faint,#8a7f6e)]">
             <input
               type="checkbox"
               defaultChecked
               {...register('consent')}
-              className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[--color-accent]"
+              className="mt-0.5 h-3.5 w-3.5 shrink-0 cursor-pointer appearance-none border border-[rgba(201,165,96,0.4)] bg-transparent transition-colors checked:border-[var(--eda-gold,#c9a560)] checked:bg-[var(--eda-gold,#c9a560)]"
               aria-invalid={!!errors.consent}
             />
             <span>
               {t('consent')}.{' '}
-              <Link href="/polityka-konfidentsiynosti" className="underline hover:text-[--color-accent]">
+              <Link
+                href="/polityka-konfidentsiynosti"
+                className="border-b border-[rgba(201,165,96,0.3)] text-[var(--eda-gold,#c9a560)] hover:border-[var(--eda-gold,#c9a560)]"
+              >
                 {t('consentLink')}
               </Link>
             </span>
           </label>
           {errors.consent && (
-            <p className="text-xs text-[--color-danger]">{errors.consent.message}</p>
+            <p className="font-heading text-[13px] italic text-[var(--color-danger)]">
+              {errors.consent.message}
+            </p>
           )}
 
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="group mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[--color-emergency] px-7 py-4 font-semibold tracking-wide text-white shadow-md transition-all hover:opacity-90 disabled:opacity-50 disabled:pointer-events-none"
+            className="editorial-submit mt-3"
           >
-            {status === 'submitting' ? t('submitting') : t('submit')}
+            <span>{status === 'submitting' ? t('submitting') : t('submit')}</span>
           </button>
 
           {status === 'error' && (
-            <div className="flex items-start gap-2 rounded-md bg-[--color-danger]/10 p-3 text-sm">
-              <AlertCircle className="mt-0.5 h-4 w-4 text-[--color-danger]" aria-hidden />
+            <div className="flex items-start gap-2 border border-[var(--color-danger)]/40 bg-[var(--color-danger)]/10 p-3 text-sm">
+              <AlertCircle
+                className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-danger)]"
+                aria-hidden
+              />
               <span>{t('errorText')}</span>
             </div>
           )}
+
+          <div className="mt-5 text-center text-[11px] tracking-wide text-[var(--eda-ink-faint,#8a7f6e)]">
+            {t('editorialFoot')}{' '}
+            <a
+              href={`tel:${SITE.phone}`}
+              className="font-medium text-[var(--eda-gold,#c9a560)] hover:text-[var(--eda-gold-bright,#e8c87a)]"
+            >
+              {SITE.phoneDisplay}
+            </a>
+          </div>
         </form>
       )}
     </div>

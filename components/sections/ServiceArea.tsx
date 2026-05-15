@@ -2,19 +2,27 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { Search, Phone, MapPin } from 'lucide-react';
+import { Search, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import locations from '@/data/locations.json';
 import type { Locale } from '@/i18n/routing';
 import { SITE } from '@/lib/utils';
 import { cn } from '@/lib/utils';
+import { ServiceAreaModal } from './ServiceAreaModal';
 
 type Group = 'vinnytsia-raion' | 'vinnytsia-oblast';
+
+interface SelectedLocation {
+  slug: string;
+  name: string;
+  distanceKm: number;
+}
 
 export function ServiceArea() {
   const t = useTranslations('serviceArea');
   const locale = useLocale() as Locale;
   const [query, setQuery] = useState('');
   const [activeGroup, setActiveGroup] = useState<Group>('vinnytsia-raion');
+  const [selected, setSelected] = useState<SelectedLocation | null>(null);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -99,16 +107,32 @@ export function ServiceArea() {
         aria-labelledby={`tab-${activeGroup}`}
       >
         {filtered.length > 0 ? (
-          <ul className="mt-10 grid grid-cols-1 gap-x-10 gap-y-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ul className="mt-10 grid grid-cols-1 gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filtered.map((l) => (
-              <li
-                key={l.slug}
-                className="flex items-baseline justify-between gap-3 border-b border-[--color-border-soft] py-3 transition-colors hover:border-[--color-accent]"
-              >
-                <span className="text-base text-[--color-ink]">{l.name[locale]}</span>
-                <small className="shrink-0 font-mono text-xs text-[--color-ink-muted]">
-                  ~{l.distanceKm} {t('kmShort')}
-                </small>
+              <li key={l.slug}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelected({
+                      slug: l.slug,
+                      name: l.name[locale],
+                      distanceKm: l.distanceKm,
+                    })
+                  }
+                  aria-label={`${t('callForLocation')} — ${l.name[locale]}`}
+                  className="group flex w-full items-baseline justify-between gap-3 border-b border-[--color-border-soft] py-3 text-left transition-all hover:border-[--color-accent] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--color-accent] focus-visible:ring-offset-2 focus-visible:ring-offset-[--color-bg]"
+                >
+                  <span className="flex items-baseline gap-2 text-base text-[--color-ink] transition-colors group-hover:text-[--color-accent]">
+                    {l.name[locale]}
+                    <ArrowUpRight
+                      className="h-3.5 w-3.5 -translate-y-px translate-x-[-4px] text-[--color-ink-muted] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:text-[--color-accent] group-hover:opacity-100"
+                      aria-hidden
+                    />
+                  </span>
+                  <small className="shrink-0 font-mono text-xs text-[--color-ink-muted]">
+                    ~{l.distanceKm} {t('kmShort')}
+                  </small>
+                </button>
               </li>
             ))}
           </ul>
@@ -130,6 +154,8 @@ export function ServiceArea() {
           {SITE.phoneDisplay}
         </a>
       </div>
+
+      <ServiceAreaModal location={selected} onClose={() => setSelected(null)} />
     </section>
   );
 }

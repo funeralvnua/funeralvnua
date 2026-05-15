@@ -145,11 +145,6 @@ export default async function PricesPage({
                       />
                     </div>
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    {p.highlighted && (
-                      <span className="absolute right-4 top-4 rounded-full bg-[--color-accent] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-[--color-bg]">
-                        {tPkg('popular')}
-                      </span>
-                    )}
                   </div>
                 )}
 
@@ -183,7 +178,7 @@ export default async function PricesPage({
 
                   <Button
                     asChild
-                    variant={p.highlighted ? 'accent' : 'outline'}
+                    variant="outline"
                     className="mt-7 w-full"
                   >
                     <a href={`tel:${SITE.phone}`}>{isUk ? 'Замовити пакет' : 'Заказать пакет'}</a>

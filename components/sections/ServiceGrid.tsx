@@ -1,57 +1,10 @@
 import { useTranslations, useLocale } from 'next-intl';
-import {
-  ArrowRight,
-  Headset,
-  Truck,
-  Snowflake,
-  FileText,
-  Users,
-  ClipboardList,
-  Car,
-  Building2,
-  Tent,
-  MapPin,
-  Shield,
-  Flame,
-  Globe,
-  Archive,
-  Diamond,
-  Sparkles,
-  BookOpen,
-  Music,
-  Music2,
-  UtensilsCrossed,
-  Circle,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import services from '@/data/services.json';
 import { RitualImage } from '@/components/ui/RitualImage';
 import { getPhoto } from '@/lib/photos';
 import type { Locale } from '@/i18n/routing';
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Headset,
-  Truck,
-  Snowflake,
-  FileText,
-  Users,
-  ClipboardList,
-  Car,
-  Building2,
-  Tent,
-  MapPin,
-  Shield,
-  Flame,
-  Globe,
-  Archive,
-  Diamond,
-  Sparkles,
-  BookOpen,
-  Music,
-  Music2,
-  UtensilsCrossed,
-};
 
 type ServiceGroup = 'urgent' | 'transport' | 'special' | 'ceremonial';
 
@@ -94,7 +47,6 @@ export function ServiceGrid() {
 
               <ul className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((s) => {
-                  const IconComponent = ICON_MAP[s.icon] ?? Circle;
                   const photoKey = `poslugy.${s.slug}`;
                   const hasPhoto = getPhoto(photoKey) !== null;
                   return (
@@ -115,13 +67,6 @@ export function ServiceGrid() {
                             </div>
                           )}
                           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
-                          {/* Іконка-бейдж */}
-                          <div className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[--color-surface]/95 backdrop-blur-sm ring-1 ring-[--color-border]">
-                            <IconComponent
-                              className="h-5 w-5 text-[--color-accent]"
-                              aria-hidden
-                            />
-                          </div>
                         </div>
 
                         {/* Тіло */}

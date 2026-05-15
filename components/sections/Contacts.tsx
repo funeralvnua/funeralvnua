@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { MapPin, Phone, Clock } from 'lucide-react';
 import { PhoneLink } from '@/components/layout/PhoneLink';
@@ -42,23 +43,35 @@ export function Contacts() {
         </div>
 
         <div className="rounded-2xl border border-[--color-border] bg-[--color-surface] p-7 md:col-span-2">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
-            <MapPin className="h-5 w-5 text-[--color-accent]" aria-hidden />
+          <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
+            <div>
+              <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
+                <MapPin className="h-5 w-5 text-[--color-accent]" aria-hidden />
+              </div>
+              <h3 className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-[--color-ink-muted]">
+                {t('addresses')}
+              </h3>
+              <ul className="mt-3 space-y-3 text-base">
+                {SITE.addresses.map((a) => (
+                  <li
+                    key={a.street}
+                    className="flex items-start gap-3 text-[--color-ink]"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[--color-accent]" aria-hidden />
+                    <span>{locale === 'uk' ? a.street : a.streetRu}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Image
+              src="/logo.webp"
+              alt={t('title')}
+              width={180}
+              height={180}
+              sizes="(min-width: 768px) 180px, 140px"
+              className="h-auto w-32 justify-self-center opacity-90 sm:w-44"
+            />
           </div>
-          <h3 className="mt-5 text-xs font-semibold uppercase tracking-[0.18em] text-[--color-ink-muted]">
-            {t('addresses')}
-          </h3>
-          <ul className="mt-3 space-y-3 text-base">
-            {SITE.addresses.map((a) => (
-              <li
-                key={a.street}
-                className="flex items-start gap-3 text-[--color-ink]"
-              >
-                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[--color-accent]" aria-hidden />
-                <span>{locale === 'uk' ? a.street : a.streetRu}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </section>
