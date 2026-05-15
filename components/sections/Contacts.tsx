@@ -43,7 +43,15 @@ export function Contacts() {
         </div>
 
         <div className="rounded-2xl border border-[--color-border] bg-[--color-surface] p-7 md:col-span-2">
-          <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-8">
+          <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-8">
+            <Image
+              src="/logo.webp"
+              alt={t('title')}
+              width={180}
+              height={180}
+              sizes="(min-width: 768px) 180px, 140px"
+              className="h-auto w-32 justify-self-center opacity-90 sm:w-44"
+            />
             <div>
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-[--color-accent-100]">
                 <MapPin className="h-5 w-5 text-[--color-accent]" aria-hidden />
@@ -63,14 +71,6 @@ export function Contacts() {
                 ))}
               </ul>
             </div>
-            <Image
-              src="/logo.webp"
-              alt={t('title')}
-              width={180}
-              height={180}
-              sizes="(min-width: 768px) 180px, 140px"
-              className="h-auto w-32 justify-self-center opacity-90 sm:w-44"
-            />
           </div>
         </div>
       </div>
