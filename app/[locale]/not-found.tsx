@@ -41,7 +41,7 @@ export default function LocaleNotFound() {
               <Search className="mb-1 mr-1 inline h-3.5 w-3.5" aria-hidden /> Корисні сторінки
             </p>
             <ul className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-              <li><Link href="/#poslugy" className="text-[--color-accent] hover:text-[--color-accent-700]">{t('services')}</Link></li>
+              <li><Link href="/poslugy/" className="text-[--color-accent] hover:text-[--color-accent-700]">{t('services')}</Link></li>
               <li><Link href="/tsiny/" className="text-[--color-accent] hover:text-[--color-accent-700]">{t('prices')}</Link></li>
               <li><Link href="/poradnyk/" className="text-[--color-accent] hover:text-[--color-accent-700]">{t('guide')}</Link></li>
               <li><Link href="/tovary/" className="text-[--color-accent] hover:text-[--color-accent-700]">{t('products')}</Link></li>

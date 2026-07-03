@@ -3,14 +3,13 @@ import { buildUrl } from '@/lib/utils';
 import { getAllSlugs, getPostBySlug } from '@/lib/content';
 import offices from '@/data/offices.json';
 
-const STATIC_PATHS = ['', 'tsiny', 'tovary', 'poradnyk', 'dopomoga', 'blog', 'pro-nas', 'kontakty'];
+const STATIC_PATHS = ['', 'poslugy', 'tsiny', 'tovary', 'poradnyk', 'dopomoga', 'blog', 'pro-nas', 'kontakty'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
+  // lastModified вказуємо лише там, де є реальна дата оновлення (frontmatter.updatedAt) —
+  // build-time `new Date()` для всіх сторінок знецінює сигнал свіжості для Google.
   const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
     url: buildUrl(path, 'uk'),
-    lastModified: now,
     changeFrequency: (path === '' ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
     priority: path === '' ? 1.0 : 0.7,
     alternates: {
@@ -33,9 +32,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const path = `${type}/${slug}`;
       dynamicEntries.push({
         url: buildUrl(path, 'uk'),
-        lastModified: post.frontmatter.updatedAt
-          ? new Date(post.frontmatter.updatedAt)
-          : now,
+        ...(post.frontmatter.updatedAt && {
+          lastModified: new Date(post.frontmatter.updatedAt),
+        }),
         changeFrequency: 'monthly',
         priority: 0.8,
         alternates: {
@@ -52,7 +51,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Offices
   const officeEntries: MetadataRoute.Sitemap = offices.map((office) => ({
     url: buildUrl(`lokatsiyi/${office.slug}`, 'uk'),
-    lastModified: now,
     changeFrequency: 'yearly',
     priority: 0.6,
     alternates: {

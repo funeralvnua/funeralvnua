@@ -35,7 +35,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex" aria-label={t('home')}>
-          <Link href="/#poslugy" className="text-sm uppercase tracking-wider text-[--color-ink-soft] hover:text-[--color-accent]">
+          <Link href="/poslugy/" className="text-sm uppercase tracking-wider text-[--color-ink-soft] hover:text-[--color-accent]">
             {t('services')}
           </Link>
           <Link href="/tsiny/" className="text-sm uppercase tracking-wider text-[--color-ink-soft] hover:text-[--color-accent]">

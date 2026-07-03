@@ -5,6 +5,7 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import { notFound } from 'next/navigation';
 import { routing, type Locale } from '@/i18n/routing';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { Analytics } from '@vercel/analytics/next';
 
 function isValidLocale(value: string): value is Locale {
   return (routing.locales as readonly string[]).includes(value);
@@ -36,7 +37,7 @@ export async function generateMetadata({
     metadataBase: new URL(SITE.url),
     title: {
       default: t('name'),
-      template: `%s | ${t('name')}`,
+      template: `%s | ${t('shortName')}`,
     },
     description: t('description'),
     alternates: {
@@ -108,6 +109,7 @@ export default async function LocaleLayout({
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
         )}
+        <Analytics />
       </body>
     </html>
   );

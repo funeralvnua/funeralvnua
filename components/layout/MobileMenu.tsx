@@ -13,7 +13,7 @@ export function MobileMenu() {
   const t = useTranslations('nav');
 
   const navItems = [
-    { href: '/#poslugy', label: t('services') },
+    { href: '/poslugy/', label: t('services') },
     { href: '/tsiny/', label: t('prices') },
     { href: '/tovary/', label: t('products') },
     { href: '/poradnyk/', label: t('guide') },

@@ -144,7 +144,7 @@ export default async function ServicePage({
           <Breadcrumbs
             items={[
               { label: tNav('home'), href: '/' },
-              { label: tNav('services'), href: '/#poslugy' },
+              { label: tNav('services'), href: '/poslugy/' },
               { label: post.frontmatter.title, href: path },
             ]}
           />

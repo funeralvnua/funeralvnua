@@ -24,6 +24,7 @@ export function Footer() {
               {t('services')}
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
+              <li><Link href="/poslugy/" className="text-[--color-ink-soft] transition-colors hover:text-[--color-ink]">{t('services')}</Link></li>
               <li><Link href="/tsiny/" className="text-[--color-ink-soft] transition-colors hover:text-[--color-ink]">{t('prices')}</Link></li>
               <li><Link href="/tovary/" className="text-[--color-ink-soft] transition-colors hover:text-[--color-ink]">{t('products')}</Link></li>
               <li><Link href="/poradnyk/" className="text-[--color-ink-soft] transition-colors hover:text-[--color-ink]">{t('guide')}</Link></li>

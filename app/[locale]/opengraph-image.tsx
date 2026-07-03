@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { SITE } from '@/lib/utils';
 
 export const runtime = 'edge';
 
@@ -18,7 +19,7 @@ export default async function OpenGraphImage({
   const subtitle = isUk
     ? 'Цілодобова організація поховань - Вінниця та область'
     : 'Круглосуточная организация похорон - Винница и область';
-  const phone = '(067) 459-78-76';
+  const phone = SITE.phoneDisplay;
 
   return new ImageResponse(
     (

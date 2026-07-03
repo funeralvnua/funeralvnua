@@ -15,7 +15,7 @@ const GROUPS: { key: ServiceGroup; tKey: 'groupUrgent' | 'groupTransport' | 'gro
   { key: 'ceremonial', tKey: 'groupCeremonial' },
 ];
 
-export function ServiceGrid() {
+export function ServiceGrid({ showHeading = true }: { showHeading?: boolean }) {
   const t = useTranslations('services');
   const tCta = useTranslations('cta');
   const locale = useLocale() as Locale;
@@ -23,17 +23,19 @@ export function ServiceGrid() {
   return (
     <section
       id="poslugy"
-      aria-labelledby="services-heading"
-      className="container-content py-16 md:py-24"
+      aria-labelledby={showHeading ? 'services-heading' : undefined}
+      className={showHeading ? 'container-content py-16 md:py-24' : 'container-content pb-16 md:pb-24'}
     >
-      <div className="max-w-3xl">
-        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--color-accent]">
-          {t('title')}
-        </span>
-        <h2 id="services-heading" className="mt-3">{t('subtitle')}</h2>
-      </div>
+      {showHeading && (
+        <div className="max-w-3xl">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[--color-accent]">
+            {t('title')}
+          </span>
+          <h2 id="services-heading" className="mt-3">{t('subtitle')}</h2>
+        </div>
+      )}
 
-      <div className="mt-14 space-y-16">
+      <div className={showHeading ? 'mt-14 space-y-16' : 'space-y-16'}>
         {GROUPS.map((group) => {
           const items = services.filter((s) => s.group === group.key);
           return (

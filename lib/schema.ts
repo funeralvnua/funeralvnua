@@ -35,6 +35,7 @@ export function getLocalBusinessSchema(locale: Locale): WithContext<LocalBusines
       streetAddress: locale === 'uk' ? a.street : a.streetRu,
       addressLocality: CITY_BY_LOCALE[locale],
       addressRegion: REGION_BY_LOCALE[locale],
+      postalCode: '21000',
       addressCountry: 'UA',
     })),
     geo: {
