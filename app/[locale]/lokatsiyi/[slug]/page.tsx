@@ -31,9 +31,9 @@ export async function generateMetadata({
   const loc = locale as Locale;
   const isUk = locale === 'uk';
   const subPath = `lokatsiyi/${slug}`;
-  const title = isUk
-    ? `${office.title.uk} - ритуальна служба Вінниця`
-    : `${office.title.ru} - ритуальная служба Винница`;
+  // Адреса — на початку тайтла: сторінка локації має вигравати адресні запити
+  // («генерала арабея 1»), а не сторінка послуги /poslugy/zal-proshchannya/.
+  const title = isUk ? office.metaTitle.uk : office.metaTitle.ru;
 
   const og = ogImageFor(`office.${slug}`, SITE.url);
 
